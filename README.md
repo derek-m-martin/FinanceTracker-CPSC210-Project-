@@ -24,3 +24,16 @@ As such, an opportunity to migrate this concept from my static Google spreadshee
 
 This project will be usable by **anyone** who wants to finally take charge of their spending and understand where their money goes while also knowing why. Finance should be an accessible and widely taught topic as it benefits absolutely everyone on the planet, whether big or small and this serves as a way for me to help out in that regard and possibly make something quite cool along the way.
 
+
+
+## User Stories
+
+**1.** As a user, I want to be able to add a new transaction to my finance tracker by specifying the amount, category (e.g., food, transportation, miscellaneous), date, and a brief description.
+
+**2.** As a user, I want to be able to view a list of all my recorded transactions, with options to sort or filter them by date or category.
+
+**3.** As a user, I want to be able to set a budget for each spending category to help manage my expenses.
+
+**4.** As a user, I want to be able to see a summary of my total spending and income over a selected time period to understand my financial habits.
+
+**5.** As a user, I want to be able to edit or delete a transaction in case I made a mistake or need to update information.
