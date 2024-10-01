@@ -18,7 +18,7 @@ public class Transaction {
     //          category is assigned to the given category
     //          date is automatically set to the current date
     //          description is set to the given TransDesc, an empty string is accepted
-    public Transaction(int TransAmount, String TransCategory, String TransDesc) {
+    public Transaction(int TransAmount, Category category, String TransDesc) {
         // stub
     }
 
