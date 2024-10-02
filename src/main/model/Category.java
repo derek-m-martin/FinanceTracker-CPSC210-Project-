@@ -15,42 +15,54 @@ public class Category {
     // EFFECTS: category name is set to catName, category budget is set to catBudget, 
     //          and an empty transaction list is initialized for the category
     public Category(String catName, int catBudget, List<Transaction> catTransactions) {
-        // stub
+        this.name = catName;
+        this.budget = catBudget;
+        this.transactions = catTransactions;
     }
 
     // REQUIRES: newName must not be an empty string
     // MODIFIES: this
     // EFFECTS: sets the category name equal to newName
     public void setName(String newName) {
-        // stub
+        this.name = newName;
     }
 
     // REQUIRES: newBudget must be > 0
     // MODIFIES: this
     // EFFECTS: sets the category budget equal to newBudget
     public void setBudget(int newBudget) {
-        // stub
+        this.budget = newBudget;
     }
 
     // REQUIRES: an existing and valid category
     // EFFECTS: adds the amounts of all transactions within the category and determines if the budget has been reached, 
     // true if it has, false if not
-    public Boolean isBudgetReached(Category category) {
-        return false; // stub
+    public Boolean isBudgetReached() {
+        int budgetCountTemporary = 0;
+        for (Transaction t : transactions) {
+            budgetCountTemporary += t.getAmount();
+        }
+        
+        if (budgetCountTemporary >= this.getBudget()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // GETTER METHODS
 
     public int getBudget() {
-        return 0; // stub
+        return this.budget;
     } 
 
     public String getName() {
-        return ""; // stub
+        return this.name;
     }
 
     public List<Transaction> getTransactions() {
-        return List.of(); // stub (List.of() just returns an immutable empty list so the stub doesn't error constantly)
+        return this.transactions;
     }
 
 }
