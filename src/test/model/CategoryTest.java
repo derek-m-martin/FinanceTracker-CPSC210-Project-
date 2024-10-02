@@ -14,7 +14,6 @@ public class CategoryTest {
     private Transaction testTransaction1;
     private Transaction testTransaction2;
     private List<Transaction> transactions;
-    private int budgetCountTemporary;
     
     @BeforeEach
     void runBefore() {
@@ -48,18 +47,10 @@ public class CategoryTest {
     }
 
     @Test
-    Boolean testIsBudgetReached() {
-        budgetCountTemporary = 0;
-        for (Transaction t : transactions) {
-            budgetCountTemporary += t.getAmount();
-        }
-        
-        if (budgetCountTemporary >= testCategory.getBudget()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    void testIsBudgetReached() {
+        assertFalse(testCategory.isBudgetReached());
+        testCategory.setBudget(100);
+        assertTrue(testCategory.isBudgetReached());
     }
 
 }
