@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,11 @@ public class TransactionTest {
     void testConstructor() {
         assertEquals(100, testTransaction.getAmount());
         assertEquals("TestDescription", testTransaction.getDescription());
-        assertEquals(null, testTransaction.getCategory());
+        assertEquals(testCategory1, testTransaction.getCategory());
+        assertEquals(LocalDate.now(), testTransaction.getDate());
+        assertNotNull(testTransaction.getId()); // tests that the UUID is not null (it exists)
+        assertDoesNotThrow(() -> UUID.fromString(testTransaction.getId().toString())); // converts the non-null transaction id to a string 
+        // then checks if it conforms to UUID format without throwing an exception
     }
 
     @Test 
