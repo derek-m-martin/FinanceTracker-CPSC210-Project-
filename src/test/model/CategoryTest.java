@@ -2,8 +2,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,18 +13,18 @@ public class CategoryTest {
     private Category testCategory;
     private Transaction testTransaction1;
     private Transaction testTransaction2;
-    private List<Transaction> transactions;
+    private HashMap<UUID, Transaction> transactions;
     
     @BeforeEach
     void runBefore() {
+        transactions = new HashMap();
+
         testTransaction1 = new Transaction(100, null, "TestDesc1"); 
-        testTransaction2 = new Transaction(350, null, "TestDesc2"); 
+        testTransaction2 = new Transaction(350, null, "TestDesc2");
+        testCategory = new Category("TestCategory", 1000, transactions); 
         
-        transactions = new ArrayList<>();
-        transactions.add(testTransaction1);
-        transactions.add(testTransaction2);
-        
-        testCategory = new Category("TestCategory", 1000, transactions);
+        transactions.put(UUID.randomUUID(), testTransaction1);
+        transactions.put(UUID.randomUUID(), testTransaction2);
     }
 
     @Test
