@@ -4,8 +4,14 @@ import model.Category;
 import model.Transaction;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class FinanceTracker {
+
+    // ************************************************************************************
+    // METHODS WHICH INITALIZE THE CONSOLE AND DEAL WITH USER INPUTS (aka the boring stuff)
+    // additional note: referenced the TellerApp for most of this sections methods
+    // ************************************************************************************
 
     // create four generic spending categories (more can be made by the user) and the scanner
     private Scanner input;
@@ -76,6 +82,10 @@ public class FinanceTracker {
         input = new Scanner(System.in);
     }
 
+    // ************************************************************************************
+    // METHODS WHICH PERFORM THE USER STORIES AND RELATED HELPER METHODS (aka the fun stuff)
+    // ************************************************************************************
+
     // MODIFIES: this
     // EFFECTS: prompts for transaction details and then creates the transaction accordingly
     private void handleAddTransaction() {
@@ -105,7 +115,6 @@ public class FinanceTracker {
             category.getTransactions().put(temp.getId(), temp);
         }
     }
-    
 
     // REQUIRES: a non-empty string
     // EFFECTS: finds the category object from given string and returns the category object,
@@ -121,7 +130,13 @@ public class FinanceTracker {
 
     // EFFECTS: displays transactions, can be filtered by date/category
     private void handleViewTransactions() {
-        // stub
+        for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
+            Category category = entry.getValue(); 
+            for (HashMap.Entry<UUID, Transaction> entry2 : category.getTransactions().entrySet()) {
+                Transaction transaction = entry2.getValue();
+                System.out.println("\nTransaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+            }
+        }
     }
 
     // MODIFIES: this
