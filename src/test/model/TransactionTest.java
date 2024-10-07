@@ -14,13 +14,11 @@ public class TransactionTest {
     private Transaction testTransaction;
     private Category testCategory1;
     private Category testCategory2;
-    private HashMap<UUID, Transaction> transactions;
 
     @BeforeEach
     void runBefore() {
-        transactions = new HashMap<>();
-        testCategory1 = new Category("TestCategory1", 500, transactions);
-        testCategory2 = new Category("TestCategory2", 1250, transactions);
+        testCategory1 = new Category("TestCategory1", 500);
+        testCategory2 = new Category("TestCategory2", 1250);
         testTransaction = new Transaction(100, testCategory1);
     }
 
