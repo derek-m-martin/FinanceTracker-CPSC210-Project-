@@ -25,7 +25,7 @@ public class Transaction {
         this.amount = TransAmount;
         this.category = category;
         this.date = LocalDate.now();
-        this.description = TransDesc;
+        this.description = "";
     }
 
     // REQUIRES: a valid transaction id and > 0 amt value
