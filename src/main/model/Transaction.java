@@ -21,13 +21,14 @@ public class Transaction {
     //          date is automatically set to the current date
     //          description is set to the given TransDesc, an empty string is accepted
     public Transaction(int TransAmount, Category category) {
-        this.id = UUID.randomUUID();  // generates a random integer between min and max
+        this.id = UUID.randomUUID();
         this.amount = TransAmount;
         this.category = category;
         this.date = LocalDate.now();
         this.description = "";
+        category.getTransactions().put(this.id, this);
     }
-
+    
     // REQUIRES: a valid transaction id and > 0 amt value
     // MODIFIES: this
     // EFFECTS: changes the amount of the transaction to the given amt
@@ -48,6 +49,7 @@ public class Transaction {
     public void moveTransaction(Category newCategory) {
         this.category = newCategory;
     }
+    
 
     // GETTER METHODS
 
