@@ -15,11 +15,12 @@ public class Category {
     // REQUIRES: catName must not be an empty string, catBudget must be > 0, catTransactions must be an empty list
     // EFFECTS: category name is set to catName, category budget is set to catBudget, 
     //          and an empty transaction list is initialized for the category
-    public Category(String catName, int catBudget, HashMap<UUID, Transaction> catTransactions) {
+    public Category(String catName, int catBudget) {
         this.name = catName;
         this.budget = catBudget;
-        this.transactions = catTransactions;
+        this.transactions = new HashMap<>();
     }
+    
 
     // REQUIRES: newName must not be an empty string
     // MODIFIES: this
