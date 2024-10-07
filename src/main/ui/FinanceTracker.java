@@ -51,12 +51,15 @@ public class FinanceTracker {
     // EFFECTS: manages user inputs
     private void processInput(String instruction) {
         if (instruction.equals("a")) {
+            System.out.println("\n");
             handleAddTransaction();
         }
         else if (instruction.equals("v")) {
+            System.out.println("\n");
             handleViewTransactions();
         }
         else if (instruction.equals("c")) {
+            System.out.println("\n");
             showCategories();
         }
     }
@@ -134,7 +137,7 @@ public class FinanceTracker {
             Category category = entry.getValue(); 
             for (HashMap.Entry<UUID, Transaction> entry2 : category.getTransactions().entrySet()) {
                 Transaction transaction = entry2.getValue();
-                System.out.println("\nTransaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+                System.out.println("Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
             }
         }
     }
@@ -154,7 +157,10 @@ public class FinanceTracker {
 
     // EFFECTS: shows all the categories and current available budgets remaining
     private void showCategories() {
-        // stub
+        for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
+            Category category = entry.getValue();
+            System.out.println(category.getName() + " with a remaining budget of: " + category.getBudget());
+        }
     }
 
 }
