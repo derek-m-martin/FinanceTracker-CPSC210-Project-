@@ -47,6 +47,8 @@ public class Transaction {
     // MODIFIES: Transaction, Category
     // EFFECTS: removes the transaction from whichever category it is currently in and inserts it into the newCategory
     public void moveTransaction(Category newCategory) {
+        this.category.getTransactions().remove(this.id);
+        newCategory.getTransactions().put(this.id, this);
         this.category = newCategory;
     }
     
