@@ -20,7 +20,7 @@ public class Transaction {
     //          category is assigned to the given category
     //          date is automatically set to the current date
     //          description is set to the given TransDesc, an empty string is accepted
-    public Transaction(int TransAmount, Category category, String TransDesc) {
+    public Transaction(int TransAmount, Category category) {
         this.id = UUID.randomUUID();  // generates a random integer between min and max
         this.amount = TransAmount;
         this.category = category;
