@@ -2,9 +2,6 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.UUID;
-import java.util.HashMap;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,25 +10,23 @@ public class CategoryTest {
     private Category testCategory;
     private Transaction testTransaction1;
     private Transaction testTransaction2;
-    private HashMap<UUID, Transaction> transactions;
     
     @BeforeEach
     void runBefore() {
-        transactions = new HashMap<UUID, Transaction>();
-
-        testTransaction1 = new Transaction(100, null); 
-        testTransaction2 = new Transaction(350, null);
-        testCategory = new Category("TestCategory", 1000, transactions); 
+        testCategory = new Category("TestCategory", 1000); 
         
-        transactions.put(UUID.randomUUID(), testTransaction1);
-        transactions.put(UUID.randomUUID(), testTransaction2);
+        testTransaction1 = new Transaction(100, testCategory); 
+        testTransaction2 = new Transaction(350, testCategory);
+
+        testCategory.getTransactions().put(testTransaction1.getId(), testTransaction1);
+        testCategory.getTransactions().put(testTransaction2.getId(), testTransaction2);
     }
 
     @Test
     void testConstructor() {
         assertEquals("TestCategory", testCategory.getName());
         assertEquals(1000, testCategory.getBudget());
-        assertEquals(transactions, testCategory.getTransactions());
+        assertEquals(2, testCategory.getTransactions().size());
     }
 
     @Test
@@ -49,8 +44,7 @@ public class CategoryTest {
     @Test
     void testIsBudgetReached() {
         assertFalse(testCategory.isBudgetReached());
-        testCategory.setBudget(100);
+        testCategory.setBudget(400);
         assertTrue(testCategory.isBudgetReached());
     }
-
 }
