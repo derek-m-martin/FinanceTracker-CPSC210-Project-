@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 // represents a category within the finance tracker which has a name, allocated budget amount, and a 
-// corresponding list of all the transactions that have been assigned to the category
+// corresponding hashmap of all the transactions that have been assigned to the category
 
 public class Category {
     
