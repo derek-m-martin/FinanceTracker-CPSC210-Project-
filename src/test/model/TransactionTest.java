@@ -21,13 +21,13 @@ public class TransactionTest {
         transactions = new HashMap<>();
         testCategory1 = new Category("TestCategory1", 500, transactions);
         testCategory2 = new Category("TestCategory2", 1250, transactions);
-        testTransaction = new Transaction(100, testCategory1, "TestDescription");
+        testTransaction = new Transaction(100, testCategory1);
     }
 
     @Test
     void testConstructor() {
         assertEquals(100, testTransaction.getAmount());
-        assertEquals("TestDescription", testTransaction.getDescription());
+        assertEquals("", testTransaction.getDescription());
         assertEquals(testCategory1, testTransaction.getCategory());
         assertEquals(LocalDate.now(), testTransaction.getDate());
         assertNotNull(testTransaction.getId()); // tests that the UUID is not null (it exists)
