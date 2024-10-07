@@ -17,10 +17,10 @@ public class CategoryTest {
     
     @BeforeEach
     void runBefore() {
-        transactions = new HashMap();
+        transactions = new HashMap<UUID, Transaction>();
 
-        testTransaction1 = new Transaction(100, null, "TestDesc1"); 
-        testTransaction2 = new Transaction(350, null, "TestDesc2");
+        testTransaction1 = new Transaction(100, null); 
+        testTransaction2 = new Transaction(350, null);
         testCategory = new Category("TestCategory", 1000, transactions); 
         
         transactions.put(UUID.randomUUID(), testTransaction1);
