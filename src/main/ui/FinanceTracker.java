@@ -174,20 +174,33 @@ public class FinanceTracker {
             System.out.println("Please enter the new amount for the transaction:");
             int newAmt = Integer.parseInt(input.next());
             toEdit.setAmount(newAmt);
-        }
-        else if (toDo.equals("delete")) {
+        } else if (toDo.equals("delete")) {
+            shiftIds(toEdit.getId());
             toEdit.deleteTransaction();
-        }
-        else if (toDo.equals("description")) {
+        } else if (toDo.equals("description")) {
             System.out.println("Please enter the new description for the transaction:");
             String newDesc = input.next();
             toEdit.setDescription(newDesc);
-        }
-        else if (toDo.equals("move")) {
+        } else if (toDo.equals("move")) {
             System.out.println("Please enter the new category for the transaction:");
             String newCat = input.next();
             toEdit.moveTransaction(findCategory(newCat));
         }  
+    }
+
+    // REQUIRES: a valid transaction id
+    // MODIFIES: Transaction objects
+    // EFFECTS: Shifts the Transaction Ids of all transactions newer than the given Id down by one to allow for
+    // consecutive ids even when a transaction is deleted
+    private void shiftIds(int threshold) {
+        for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
+            Category category = entry.getValue(); 
+            for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
+                if (entry2.getKey() > threshold) {
+                    entry2.getValue().setId(entry2.getKey() - 1);
+                }
+            }
+        }
     }
 
     // REQUIRES: an integer
