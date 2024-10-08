@@ -34,6 +34,6 @@ This project will be usable by **anyone** who wants to finally take charge of th
 
 **3.** As a user, I want to be able to set a budget for each spending category to help manage my expenses.
 
-**4.** As a user, I want to be able to see a summary of my total spending and income over a selected time period to understand my financial habits.
+**4.** As a user, I want to be able to see a summary of my total spending over a selected time period to understand my financial habits.
 
 **5.** As a user, I want to be able to edit or delete a transaction in case I made a mistake or need to update information.
