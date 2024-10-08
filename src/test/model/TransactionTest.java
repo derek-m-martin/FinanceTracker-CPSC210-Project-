@@ -54,4 +54,11 @@ public class TransactionTest {
         testTransaction.deleteTransaction();
         assertEquals(null, testCategory1.getTransactions().get(1));
     }
+
+    @Test
+    void testSetId() {
+        assertEquals(1, testTransaction.getId());
+        testTransaction.setId(5);
+        assertEquals(5, testTransaction.getId());
+    }
 }
