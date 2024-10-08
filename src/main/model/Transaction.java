@@ -27,7 +27,7 @@ public class Transaction {
         category.getTransactions().put(this.id, this);
     }
     
-    // REQUIRES: a valid transaction id and > 0 amt value
+    // REQUIRES: > 0 amt value
     // MODIFIES: this
     // EFFECTS: changes the amount of the transaction to the given amt
     public void setAmount(int amt) {
@@ -49,8 +49,16 @@ public class Transaction {
         this.category = newCategory;
     }
 
+    // MODIFIES: this
+    // EFFECTS: deletes a transaction object
     public void deleteTransaction() {
         category.getTransactions().remove(this.id);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes the transaction objects id to the given newId
+    public void setId(int newId) {
+        this.id = newId;
     }
     
 
