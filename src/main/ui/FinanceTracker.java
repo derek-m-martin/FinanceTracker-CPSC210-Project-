@@ -4,7 +4,6 @@ import model.Category;
 import model.Transaction;
 import java.util.Scanner;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class FinanceTracker {
 
@@ -22,7 +21,7 @@ public class FinanceTracker {
     public FinanceTracker() {
         categories = new HashMap<>();
         startTracker();
-        nextTransactionId = 0;
+        nextTransactionId = 1;
     }
 
     // MODIFIES: this
@@ -38,7 +37,7 @@ public class FinanceTracker {
             instruction = input.next();
             instruction = instruction.toLowerCase();
 
-            if (instruction.equals("e")) {
+            if (instruction.equals("q")) {
                 stop = true;
             }
             else {
@@ -64,6 +63,10 @@ public class FinanceTracker {
             System.out.println("\n");
             showCategories();
         }
+        else if (instruction.equals("e")) {
+            System.out.println("\n");
+            handleEditTransaction();
+        }
     }
 
     // EFFECTS: displays options to the user
@@ -73,7 +76,8 @@ public class FinanceTracker {
         System.out.println("\tSelect 'a' to add a transaction");
         System.out.println("\tSelect 'v' to view a summary of your transactions");
         System.out.println("\tSelect 'c' to view your current spending categories");
-        System.out.println("\tSelect 'e' to exit the Finance Tracker");
+        System.out.println("\tSelect 'e' to edit, delete, or move a transaction between categories");
+        System.out.println("\tSelect 'q' to quit the Finance Tracker");
     }
 
     // MODIFIES: this
@@ -103,11 +107,9 @@ public class FinanceTracker {
         String holder = input.next();
         category = findCategory(holder);
         if (category == null) {
-            System.out.println("\n\t A category by that name was not located, would you like to create a new one with that name? (yes or no)");
-            if (input.next().equalsIgnoreCase("yes")) {
-                category = new Category(holder.toUpperCase(), 100);
-                categories.put(holder, category);
-            }
+            System.out.println("\n\t A category by that name was not located, one has been created with that name and the transaction is complete.");
+            category = new Category(holder.toUpperCase(), 100);
+            categories.put(holder, category);
         }
         if (category != null) {
             System.out.println("\n\t OPTIONAL - enter a brief transaction description, say 'skip' if not needed:");
@@ -139,22 +141,60 @@ public class FinanceTracker {
             Category category = entry.getValue(); 
             for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 Transaction transaction = entry2.getValue();
-                System.out.println("Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
             }
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: category
     // EFFECTS: allows user to select categories and set the budget as desired
     private void handleSetBudget() {
         // stub
     }
 
-    // MODIFIES: this
+    // MODIFIES: transaction
     // EFFECTS: allows user to select specific transactions and edit information about them
     // or delete the transaction entirely
     private void handleEditTransaction() {
-        // stub
+        System.out.println("Please enter the transaction ID for the transaction you would like to edit: ");
+        int toSearch = Integer.parseInt(input.next());
+        Transaction toEdit = findTransaction(toSearch);
+        System.out.println("Found this transaction with the given id: "+ toEdit.getId() + ", Transaction Amount: $" + toEdit.getAmount() + ", Description: " + toEdit.getDescription() + ", Date: " + toEdit.getDate());;
+        System.out.println("\nWhat would you like to do? Enter 'amount' to change the transaction amount, enter 'delete' to delete the transaction, enter 'description' to edit the description or enter 'move' to move the transaction to a different category:");
+        String toDo = input.next();
+        if (toDo.equals("amount")) {
+            System.out.println("Please enter the new amount for the transaction:");
+            int newAmt = Integer.parseInt(input.next());
+            toEdit.setAmount(newAmt);
+        }
+        else if (toDo.equals("delete")) {
+            toEdit.deleteTransaction();
+        }
+        else if (toDo.equals("description")) {
+            System.out.println("Please enter the new description for the transaction:");
+            String newDesc = input.next();
+            toEdit.setDescription(newDesc);
+        }
+        else if (toDo.equals("move")) {
+            System.out.println("Please enter the new category for the transaction:");
+            String newCat = input.next();
+            toEdit.moveTransaction(findCategory(newCat));
+        }  
+    }
+
+    // REQUIRES: an integer
+    // EFFECTS: searches through all the transactions for the one corresponding to the given id,
+    // if one is found, return the transaction object otherwise return null
+    private Transaction findTransaction(int num) {
+        for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
+            Category category = entry.getValue(); 
+            for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
+                if (entry2.getKey() == num) {
+                    return entry2.getValue();
+                }
+            }
+        }
+        return null;
     }
 
     // EFFECTS: shows all the categories and current available budgets remaining
