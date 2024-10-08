@@ -67,6 +67,10 @@ public class FinanceTracker {
             System.out.println("\n");
             handleEditTransaction();
         }
+        else if (instruction.equals("b")) {
+            System.out.println("\n");
+            handleSetBudget();
+        }
     }
 
     // EFFECTS: displays options to the user
@@ -77,6 +81,7 @@ public class FinanceTracker {
         System.out.println("\tSelect 'v' to view a summary of your transactions");
         System.out.println("\tSelect 'c' to view your current spending categories");
         System.out.println("\tSelect 'e' to edit, delete, or move a transaction between categories");
+        System.out.println("\tSelect 'b' to change a category's budget");
         System.out.println("\tSelect 'q' to quit the Finance Tracker");
     }
 
@@ -149,7 +154,10 @@ public class FinanceTracker {
     // MODIFIES: category
     // EFFECTS: allows user to select categories and set the budget as desired
     private void handleSetBudget() {
-        // stub
+        System.out.println("Please specify which category's budget you would like to change:");
+        Category toChange = findCategory(input.next());
+        System.out.println("Now enter the new budget for that category:");
+        toChange.setBudget(Integer.parseInt(input.next()));
     }
 
     // MODIFIES: transaction
