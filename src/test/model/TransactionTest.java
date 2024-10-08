@@ -2,9 +2,7 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashMap;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,5 +46,12 @@ public class TransactionTest {
         assertEquals(testCategory1, testTransaction.getCategory());
         testTransaction.moveTransaction(testCategory2);
         assertEquals(testCategory2, testTransaction.getCategory());
+    }
+
+    @Test
+    void testDeleteTransaction() {
+        assertEquals(testTransaction, testCategory1.getTransactions().get(1));
+        testTransaction.deleteTransaction();
+        assertEquals(null, testCategory1.getTransactions().get(1));
     }
 }
