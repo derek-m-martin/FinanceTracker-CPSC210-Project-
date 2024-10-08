@@ -3,6 +3,9 @@ package ui;
 import model.Category;
 import model.Transaction;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class FinanceTracker {
@@ -21,7 +24,7 @@ public class FinanceTracker {
     public FinanceTracker() {
         categories = new HashMap<>();
         startTracker();
-        nextTransactionId = 1;
+        nextTransactionId = 0;
     }
 
     // MODIFIES: this
@@ -149,6 +152,45 @@ public class FinanceTracker {
                 System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
             }
         }
+        System.out.println("Enter 'oldest' to filter the list by oldest to newest, 'newest' to filter by newest to oldest, or 'menu' to go back to the menu:");
+        if (input.next().equals("oldest")) {
+            filterTransactionOldest();
+        }
+        else if (input.next().equals("newest")) {
+            filterTransactionNewest();
+        }
+    }
+
+    // EFFECTS: filters all of the transactions from oldest to newest
+    private void filterTransactionOldest() {
+        List<Transaction> transactionList = new ArrayList<>();
+        for (Category category : categories.values()) {
+            transactionList.addAll(category.getTransactions().values());
+        }
+        transactionList.sort(Comparator.comparingInt(Transaction::getId));
+        for (Transaction transaction : transactionList) {
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+        }
+    }
+    
+
+    // EFFECTS: filters all of the transactions from newest to oldest
+    private void filterTransactionNewest() {
+        List<Transaction> transactionList = new ArrayList<>();
+        for (Category category : categories.values()) {
+            transactionList.addAll(category.getTransactions().values());
+        }
+        transactionList.sort(Comparator.comparingInt(Transaction::getId).reversed());
+        for (Transaction transaction : transactionList) {
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+        }
+    }
+    
+    
+
+    // EFFECTS: groups transactions by category
+    private void groupTransactions() {
+        // stub
     }
 
     // MODIFIES: category
