@@ -11,11 +11,13 @@ import java.util.HashMap;
 public class FinanceTracker {
 
     // ************************************************************************************
-    // METHODS WHICH INITALIZE THE CONSOLE AND DEAL WITH USER INPUTS (aka the boring stuff)
+    // METHODS WHICH INITALIZE THE CONSOLE AND DEAL WITH USER INPUTS (aka the boring
+    // stuff)
     // additional note: referenced the TellerApp for most of this sections methods
     // ************************************************************************************
 
-    // create four generic spending categories (more can be made by the user) and the scanner
+    // create four generic spending categories (more can be made by the user) and
+    // the scanner
     private Scanner input;
     private HashMap<String, Category> categories;
     private int nextTransactionId;
@@ -42,12 +44,10 @@ public class FinanceTracker {
 
             if (instruction.equals("q")) {
                 stop = true;
-            }
-            else {
+            } else {
                 processInput(instruction);
             }
-        }
-        while (!stop);
+        } while (!stop);
 
     }
 
@@ -57,20 +57,16 @@ public class FinanceTracker {
         if (instruction.equals("a")) {
             System.out.println();
             handleAddTransaction();
-        }
-        else if (instruction.equals("v")) {
+        } else if (instruction.equals("v")) {
             System.out.println();
             handleViewTransactions();
-        }
-        else if (instruction.equals("c")) {
+        } else if (instruction.equals("c")) {
             System.out.println();
             showCategories();
-        }
-        else if (instruction.equals("e")) {
+        } else if (instruction.equals("e")) {
             System.out.println();
             handleEditTransaction();
-        }
-        else if (instruction.equals("b")) {
+        } else if (instruction.equals("b")) {
             System.out.println();
             handleSetBudget();
         }
@@ -100,11 +96,13 @@ public class FinanceTracker {
     }
 
     // ************************************************************************************
-    // METHODS WHICH PERFORM THE USER STORIES AND RELATED HELPER METHODS (aka the fun stuff)
+    // METHODS WHICH PERFORM THE USER STORIES AND RELATED HELPER METHODS (aka the
+    // fun stuff)
     // ************************************************************************************
 
     // MODIFIES: this
-    // EFFECTS: prompts for transaction details and then creates the transaction accordingly
+    // EFFECTS: prompts for transaction details and then creates the transaction
+    // accordingly
     private void handleAddTransaction() {
         int amount;
         Category category = null;
@@ -115,7 +113,8 @@ public class FinanceTracker {
         String holder = input.next();
         category = findCategory(holder);
         if (category == null) {
-            System.out.println("\n\t A category by that name was not located, one has been created with that name and the transaction is complete.");
+            System.out.println(
+                    "\n\t A category by that name was not located, one has been created with that name and the transaction is complete.");
             category = new Category(holder.toUpperCase(), 100);
             categories.put(holder, category);
         }
@@ -128,11 +127,13 @@ public class FinanceTracker {
             Transaction temp = new Transaction(nextTransactionId++, amount, category);
             temp.setDescription(desc);
             category.getTransactions().put(temp.getId(), temp);
+            category.setBudget(category.getBudget() - amount);
         }
     }
 
     // REQUIRES: a non-empty string
-    // EFFECTS: finds the category object from given string and returns the category object,
+    // EFFECTS: finds the category object from given string and returns the category
+    // object,
     // if no such category exists then it will return null
     public Category findCategory(String toFind) {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
@@ -146,20 +147,22 @@ public class FinanceTracker {
     // EFFECTS: displays transactions, can be filtered by date/category
     private void handleViewTransactions() {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
-            Category category = entry.getValue(); 
+            Category category = entry.getValue();
             for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 Transaction transaction = entry2.getValue();
-                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
+                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount()
+                        + ", Description: " + transaction.getDescription() + ", Category: "
+                        + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
             }
         }
-        System.out.println("Enter 'oldest' to filter the list by oldest to newest, 'newest' to filter by newest to oldest, 'category' to filter by category, or 'menu' to go back to the menu:");
+        System.out.println();
+        System.out.println(
+                "Enter 'oldest' to filter the list by oldest to newest, 'newest' to filter by newest to oldest, 'category' to filter by category, or 'menu' to go back to the menu:");
         if (input.next().equals("oldest")) {
             filterTransactionOldest();
-        }
-        else if (input.next().equals("newest")) {
+        } else if (input.next().equals("newest")) {
             filterTransactionNewest();
-        }
-        else if (input.next().equals("category")) {
+        } else if (input.next().equals("category")) {
             groupTransactions();
         }
     }
@@ -172,7 +175,9 @@ public class FinanceTracker {
         }
         transactionList.sort(Comparator.comparingInt(Transaction::getId));
         for (Transaction transaction : transactionList) {
-            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount()
+                    + ", Description: " + transaction.getDescription() + ", Category: "
+                    + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
         }
     }
 
@@ -184,7 +189,9 @@ public class FinanceTracker {
         }
         transactionList.sort(Comparator.comparingInt(Transaction::getId).reversed());
         for (Transaction transaction : transactionList) {
-            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount()
+                    + ", Description: " + transaction.getDescription() + ", Category: "
+                    + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
         }
     }
 
@@ -195,7 +202,8 @@ public class FinanceTracker {
             List<Transaction> transactionList = new ArrayList<>(category.getTransactions().values());
             transactionList.sort(Comparator.comparingInt(Transaction::getId));
             for (Transaction transaction : transactionList) {
-                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount()
+                        + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
             }
             System.out.println();
         }
@@ -211,14 +219,18 @@ public class FinanceTracker {
     }
 
     // MODIFIES: transaction
-    // EFFECTS: allows user to select specific transactions and edit information about them
+    // EFFECTS: allows user to select specific transactions and edit information
+    // about them
     // or delete the transaction entirely
     private void handleEditTransaction() {
         System.out.println("Please enter the transaction ID for the transaction you would like to edit: ");
         int toSearch = Integer.parseInt(input.next());
         Transaction toEdit = findTransaction(toSearch);
-        System.out.println("Found this transaction with the given id: "+ toEdit.getId() + ", Transaction Amount: $" + toEdit.getAmount() + ", Description: " + toEdit.getDescription() + ", Date: " + toEdit.getDate());;
-        System.out.println("\nWhat would you like to do? Enter 'amount' to change the transaction amount, enter 'delete' to delete the transaction, enter 'description' to edit the description or enter 'move' to move the transaction to a different category:");
+        System.out.println("Found this transaction with the given id: " + toEdit.getId() + ", Transaction Amount: $"
+                + toEdit.getAmount() + ", Description: " + toEdit.getDescription() + ", Date: " + toEdit.getDate());
+        ;
+        System.out.println(
+                "\nWhat would you like to do? Enter 'amount' to change the transaction amount, enter 'delete' to delete the transaction, enter 'description' to edit the description or enter 'move' to move the transaction to a different category:");
         String toDo = input.next();
         if (toDo.equals("amount")) {
             System.out.println("Please enter the new amount for the transaction:");
@@ -235,16 +247,17 @@ public class FinanceTracker {
             System.out.println("Please enter the new category for the transaction:");
             String newCat = input.next();
             toEdit.moveTransaction(findCategory(newCat));
-        }  
+        }
     }
 
     // REQUIRES: a valid transaction id
     // MODIFIES: Transaction objects
-    // EFFECTS: Shifts the Transaction Ids of all transactions newer than the given Id down by one to allow for
+    // EFFECTS: Shifts the Transaction Ids of all transactions newer than the given
+    // Id down by one to allow for
     // consecutive ids even when a transaction is deleted
     private void shiftIds(int threshold) {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
-            Category category = entry.getValue(); 
+            Category category = entry.getValue();
             for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 if (entry2.getKey() > threshold) {
                     entry2.getValue().setId(entry2.getKey() - 1);
@@ -254,11 +267,12 @@ public class FinanceTracker {
     }
 
     // REQUIRES: an integer
-    // EFFECTS: searches through all the transactions for the one corresponding to the given id,
+    // EFFECTS: searches through all the transactions for the one corresponding to
+    // the given id,
     // if one is found, return the transaction object otherwise return null
     private Transaction findTransaction(int num) {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
-            Category category = entry.getValue(); 
+            Category category = entry.getValue();
             for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 if (entry2.getKey() == num) {
                     return entry2.getValue();
@@ -272,7 +286,14 @@ public class FinanceTracker {
     private void showCategories() {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
             Category category = entry.getValue();
-            System.out.println(category.getName() + " with a budget of: " + category.getBudget());
+            if (category.getBudget() > 0) {
+                System.out.println(category.getName() + " with a remaining budget of: " + category.getBudget());
+            } else if (category.getBudget() == 0) {
+                System.out.println(category.getName()
+                        + " has reached its allotted budget! If you spend any more in that category you will be in a deficit!");
+            } else {
+                System.out.println(category.getName() + " with a budget deficit of: " + category.getBudget());
+            }
         }
     }
 
