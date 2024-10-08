@@ -55,23 +55,23 @@ public class FinanceTracker {
     // EFFECTS: manages user inputs
     private void processInput(String instruction) {
         if (instruction.equals("a")) {
-            System.out.println("\n");
+            System.out.println();
             handleAddTransaction();
         }
         else if (instruction.equals("v")) {
-            System.out.println("\n");
+            System.out.println();
             handleViewTransactions();
         }
         else if (instruction.equals("c")) {
-            System.out.println("\n");
+            System.out.println();
             showCategories();
         }
         else if (instruction.equals("e")) {
-            System.out.println("\n");
+            System.out.println();
             handleEditTransaction();
         }
         else if (instruction.equals("b")) {
-            System.out.println("\n");
+            System.out.println();
             handleSetBudget();
         }
     }
@@ -149,15 +149,18 @@ public class FinanceTracker {
             Category category = entry.getValue(); 
             for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 Transaction transaction = entry2.getValue();
-                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
             }
         }
-        System.out.println("Enter 'oldest' to filter the list by oldest to newest, 'newest' to filter by newest to oldest, or 'menu' to go back to the menu:");
+        System.out.println("Enter 'oldest' to filter the list by oldest to newest, 'newest' to filter by newest to oldest, 'category' to filter by category, or 'menu' to go back to the menu:");
         if (input.next().equals("oldest")) {
             filterTransactionOldest();
         }
         else if (input.next().equals("newest")) {
             filterTransactionNewest();
+        }
+        else if (input.next().equals("category")) {
+            groupTransactions();
         }
     }
 
@@ -169,10 +172,9 @@ public class FinanceTracker {
         }
         transactionList.sort(Comparator.comparingInt(Transaction::getId));
         for (Transaction transaction : transactionList) {
-            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
         }
     }
-    
 
     // EFFECTS: filters all of the transactions from newest to oldest
     private void filterTransactionNewest() {
@@ -182,15 +184,21 @@ public class FinanceTracker {
         }
         transactionList.sort(Comparator.comparingInt(Transaction::getId).reversed());
         for (Transaction transaction : transactionList) {
-            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+            System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Category: " + transaction.getCategory().getName() + ", Date: " + transaction.getDate());
         }
     }
-    
-    
 
     // EFFECTS: groups transactions by category
     private void groupTransactions() {
-        // stub
+        for (Category category : categories.values()) {
+            System.out.println("Category: " + category.getName());
+            List<Transaction> transactionList = new ArrayList<>(category.getTransactions().values());
+            transactionList.sort(Comparator.comparingInt(Transaction::getId));
+            for (Transaction transaction : transactionList) {
+                System.out.println("ID: " + transaction.getId() + ", Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
+            }
+            System.out.println();
+        }
     }
 
     // MODIFIES: category
