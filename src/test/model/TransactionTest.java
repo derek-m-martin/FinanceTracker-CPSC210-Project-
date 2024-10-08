@@ -19,7 +19,7 @@ public class TransactionTest {
     void runBefore() {
         testCategory1 = new Category("TestCategory1", 500);
         testCategory2 = new Category("TestCategory2", 1250);
-        testTransaction = new Transaction(100, testCategory1);
+        testTransaction = new Transaction(1, 100, testCategory1);
     }
 
     @Test
@@ -28,9 +28,7 @@ public class TransactionTest {
         assertEquals("", testTransaction.getDescription());
         assertEquals(testCategory1, testTransaction.getCategory());
         assertEquals(LocalDate.now(), testTransaction.getDate());
-        assertNotNull(testTransaction.getId()); // tests that the UUID is not null (it exists)
-        assertDoesNotThrow(() -> UUID.fromString(testTransaction.getId().toString())); // converts the non-null transaction id to a string 
-        // then checks if it conforms to UUID format without throwing an exception
+        assertEquals(1, testTransaction.getId());
     }
 
     @Test 

@@ -10,7 +10,7 @@ public class Category {
     
     private String name;
     private int budget;
-    private HashMap<UUID, Transaction> transactions;
+    private HashMap<Integer, Transaction> transactions;
 
     // REQUIRES: catName must not be an empty string, catBudget must be > 0, catTransactions must be an empty list
     // EFFECTS: category name is set to catName, category budget is set to catBudget, 
@@ -58,7 +58,7 @@ public class Category {
         return this.name;
     }
 
-    public HashMap<UUID, Transaction> getTransactions() {
+    public HashMap<Integer, Transaction> getTransactions() {
         return this.transactions;
     }
 

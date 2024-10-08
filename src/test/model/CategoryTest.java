@@ -15,8 +15,8 @@ public class CategoryTest {
     void runBefore() {
         testCategory = new Category("TestCategory", 1000); 
         
-        testTransaction1 = new Transaction(100, testCategory); 
-        testTransaction2 = new Transaction(350, testCategory);
+        testTransaction1 = new Transaction(1, 100, testCategory); 
+        testTransaction2 = new Transaction(2, 350, testCategory);
 
         testCategory.getTransactions().put(testTransaction1.getId(), testTransaction1);
         testCategory.getTransactions().put(testTransaction2.getId(), testTransaction2);

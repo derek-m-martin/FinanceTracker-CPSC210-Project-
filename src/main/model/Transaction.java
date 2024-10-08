@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Transaction {
 
-    private UUID id; // a unique transaction id generated with UUID
+    private int id; // a unique transaction id generated with UUID
     private int amount; // transaction amount in dollars
     private Category category; // category in which the transaction is
     private LocalDate date; // date that the transaction was placed on
@@ -20,8 +20,8 @@ public class Transaction {
     //          category is assigned to the given category
     //          date is automatically set to the current date
     //          description is set to the given TransDesc, an empty string is accepted
-    public Transaction(int TransAmount, Category category) {
-        this.id = UUID.randomUUID();
+    public Transaction(int id, int TransAmount, Category category) {
+        this.id = id;
         this.amount = TransAmount;
         this.category = category;
         this.date = LocalDate.now();
@@ -55,7 +55,7 @@ public class Transaction {
 
     // GETTER METHODS
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 

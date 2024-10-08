@@ -16,11 +16,13 @@ public class FinanceTracker {
     // create four generic spending categories (more can be made by the user) and the scanner
     private Scanner input;
     private HashMap<String, Category> categories;
+    private int nextTransactionId;
 
     // EFFECTS: starts the financetracker console application
     public FinanceTracker() {
         categories = new HashMap<>();
         startTracker();
+        nextTransactionId = 0;
     }
 
     // MODIFIES: this
@@ -113,7 +115,7 @@ public class FinanceTracker {
             if (desc.equalsIgnoreCase("skip")) {
                 desc = "";
             }
-            Transaction temp = new Transaction(amount, category);
+            Transaction temp = new Transaction(nextTransactionId++, amount, category);
             temp.setDescription(desc);
             category.getTransactions().put(temp.getId(), temp);
         }
@@ -135,7 +137,7 @@ public class FinanceTracker {
     private void handleViewTransactions() {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
             Category category = entry.getValue(); 
-            for (HashMap.Entry<UUID, Transaction> entry2 : category.getTransactions().entrySet()) {
+            for (HashMap.Entry<Integer, Transaction> entry2 : category.getTransactions().entrySet()) {
                 Transaction transaction = entry2.getValue();
                 System.out.println("Transaction Amount: $" + transaction.getAmount() + ", Description: " + transaction.getDescription() + ", Date: " + transaction.getDate());
             }
@@ -159,7 +161,7 @@ public class FinanceTracker {
     private void showCategories() {
         for (HashMap.Entry<String, Category> entry : categories.entrySet()) {
             Category category = entry.getValue();
-            System.out.println(category.getName() + " with a remaining budget of: " + category.getBudget());
+            System.out.println(category.getName() + " with a budget of: " + category.getBudget());
         }
     }
 
