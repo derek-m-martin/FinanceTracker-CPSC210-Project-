@@ -1,8 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.UUID;
-
 
 // represents a transaction which gets a transaction id, amount (dollars), category, date, and description 
 
@@ -36,7 +34,6 @@ public class Transaction {
         this.amount = amt;
     }
 
-    // REQUIRES: a valid transaction id (newDesc CAN be an empty string)
     // MODIFIES: this
     // EFFECTS: changes the description of the transaction to the given newDesc
     public void setDescription(String newDesc) {
@@ -50,6 +47,10 @@ public class Transaction {
         this.category.getTransactions().remove(this.id);
         newCategory.getTransactions().put(this.id, this);
         this.category = newCategory;
+    }
+
+    public void deleteTransaction() {
+        category.getTransactions().remove(this.id);
     }
     
 
