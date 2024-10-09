@@ -29,7 +29,7 @@ public class TransactionTest {
         assertEquals(1, testTransaction.getId());
     }
 
-    @Test 
+    @Test
     void testSetAmount() {
         testTransaction.setAmount(500);
         assertEquals(500, testTransaction.getAmount());
