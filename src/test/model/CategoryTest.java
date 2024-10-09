@@ -10,12 +10,12 @@ public class CategoryTest {
     private Category testCategory;
     private Transaction testTransaction1;
     private Transaction testTransaction2;
-    
+
     @BeforeEach
     void runBefore() {
-        testCategory = new Category("TestCategory", 1000); 
-        
-        testTransaction1 = new Transaction(1, 100, testCategory); 
+        testCategory = new Category("TestCategory", 1000);
+
+        testTransaction1 = new Transaction(1, 100, testCategory);
         testTransaction2 = new Transaction(2, 350, testCategory);
 
         testCategory.getTransactions().put(testTransaction1.getId(), testTransaction1);
