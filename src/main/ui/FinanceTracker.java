@@ -43,8 +43,7 @@ public class FinanceTracker {
             } else {
                 processInput(instruction);
             }
-        } 
-        while (!stop);
+        } while (!stop);
     }
 
     // MODIFIES: this
@@ -373,6 +372,7 @@ public class FinanceTracker {
         System.out.println("Spent an additional $" + miscellaneousPrint + " in uncategorized transactions");
     }
 
+    @SuppressWarnings("methodlength")
     // REQUIRES: five integer values and a non-empty list of Transaction objects
     // MODIFIES: the given integer values
     // EFFECTS: aggregates spending amounts by category
@@ -381,7 +381,6 @@ public class FinanceTracker {
         for (Transaction t : transactionsSorted) {
             int amount = t.getAmount();
             String categoryName = t.getCategory().getName().toLowerCase();
-
             switch (categoryName) {
                 case "food":
                     food += amount;
@@ -400,7 +399,6 @@ public class FinanceTracker {
                     break;
             }
         }
-
         List<Integer> nums = new ArrayList<>();
         nums.add(food);
         nums.add(housing);
