@@ -37,3 +37,8 @@ This project will be usable by **anyone** who wants to finally take charge of th
 **4.** As a user, I want to be able to see a summary of my total spending over a selected time period to understand my financial habits.
 
 **5.** As a user, I want to be able to edit or delete a transaction in case I made a mistake or need to update information.
+
+**6.** As a user, I want to be able to save all my transactions and their respective information such as which category they are in, (if I choose to do so.)
+
+**7.** As a user, I want to be prompted to load my saved transactions and accompanying information when the FinanceTracker is started (if I choose to do so.)
+
