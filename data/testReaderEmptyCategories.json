@@ -1,0 +1,30 @@
+{
+    "categories": [
+      {
+        "name": "FOOD",
+        "budget": 1000,
+        "transactions": []
+      },
+      {
+        "name": "TRANSPORTATION",
+        "budget": 1000,
+        "transactions": []
+      },
+      {
+        "name": "ENTERTAINMENT",
+        "budget": 1000,
+        "transactions": []
+      },
+      {
+        "name": "HOUSING",
+        "budget": 1000,
+        "transactions": []
+      },
+      {
+        "name": "MISCELLANEOUS",
+        "budget": 1000,
+        "transactions": []
+      }
+    ]
+  }
+  
