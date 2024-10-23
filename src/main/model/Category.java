@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Represents a category within the finance tracker with a name, budget, and transactions
@@ -46,6 +47,13 @@ public class Category {
     // EFFECTS: takes a category object and converts it into json format
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        // to fill
+        return json;
+    }
+
+    // EFFECTS: takes the transaction hashmap and converts it into json array format
+    public JSONArray transactionsToJson() {
+        JSONArray json = new JSONArray();
         // to fill
         return json;
     }
