@@ -448,4 +448,15 @@ public class FinanceTracker {
         }
         return dates;
     }
+
+    // EFFECTS: saves the categories and their transactions to a json file
+    private void saveState() {
+        // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads the categories and their transactions from a json file
+    private void loadState() {
+        // stub
+    }
 }
