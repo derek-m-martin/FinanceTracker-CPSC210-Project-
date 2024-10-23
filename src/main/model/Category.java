@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 // Represents a category within the finance tracker with a name, budget, and transactions
 
 public class Category {
@@ -40,6 +42,12 @@ public class Category {
             totalSpent += t.getAmount();
         }
         return totalSpent >= this.getBudget();
+    }
+    // EFFECTS: takes a category object and converts it into json format
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        // to fill
+        return json;
     }
 
     // Getter methods

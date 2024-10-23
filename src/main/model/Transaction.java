@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import org.json.JSONObject;
+
 // Represents a transaction which includes an ID, amount, category, date, and description
 
 public class Transaction {
@@ -61,6 +63,13 @@ public class Transaction {
     // EFFECTS: sets a new ID for the transaction
     public void setId(int newId) {
         this.id = newId;
+    }
+
+    // EFFECTS: takes a transaction object and converts it into json format
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        // to fill
+        return json;
     }
 
     // Getter methods
