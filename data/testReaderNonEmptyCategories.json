@@ -14,27 +14,13 @@
       },
       {
         "name": "TRANSPORTATION",
-        "budget": 950,
-        "transactions": [
-          {
-            "id": 2,
-            "amount": 50,
-            "description": "Bus fare",
-            "date": "2024-10-21"
-          }
-        ]
+        "budget": 1000,
+        "transactions": []
       },
       {
         "name": "ENTERTAINMENT",
-        "budget": 900,
-        "transactions": [
-          {
-            "id": 3,
-            "amount": 100,
-            "description": "Movie night",
-            "date": "2024-10-22"
-          }
-        ]
+        "budget": 1000,
+        "transactions": []
       },
       {
         "name": "HOUSING",
