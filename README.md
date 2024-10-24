@@ -42,3 +42,5 @@ This project will be usable by **anyone** who wants to finally take charge of th
 
 **7.** As a user, I want to be prompted to load my saved transactions and accompanying information when the FinanceTracker is started (if I choose to do so.)
 
+**8.** As a user, I want to be able to reset my saved data if I choose to do so.
+
