@@ -4,23 +4,32 @@ import model.Category;
 import model.Transaction;
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 public class FinanceTracker {
 
-    // Necessary fields
     private Scanner input;
     private HashMap<String, Category> categories;
     private int nextTransactionId;
+    private static final String JSON_STORE = "ProjectStarter/data/financetracker.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    // Constructor
     // EFFECTS: starts the finance tracker console application
     public FinanceTracker() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         categories = new HashMap<>();
         startTracker();
         nextTransactionId = 0;
@@ -33,12 +42,23 @@ public class FinanceTracker {
         String instruction = "";
 
         initialize();
+        
+        System.out.println("Would you like to load your previous saved data? (y/n)");
+        String loadAnswer = input.next().toLowerCase();
+        if (loadAnswer.equals("y")) {
+            loadState();
+        }
 
         do {
             display();
             instruction = input.next().toLowerCase();
 
             if (instruction.equals("q")) {
+                System.out.println("Would you like to save your data before quitting? (y/n)");
+                String saveAnswer = input.next().toLowerCase();
+                if (saveAnswer.equals("y")) {
+                    saveState();
+                }
                 stop = true;
             } else {
                 processInput(instruction);
@@ -67,6 +87,9 @@ public class FinanceTracker {
         } else if (instruction.equals("s")) {
             System.out.println();
             handleSummarize();
+        } else if (instruction.equals("r")) {
+            System.out.println();
+            resetData();
         }
     }
 
@@ -80,6 +103,7 @@ public class FinanceTracker {
         System.out.println("\tSelect 'e' to edit, delete, or move a transaction between categories");
         System.out.println("\tSelect 'b' to change a category's budget");
         System.out.println("\tSelect 's' to receive a summary of your finances");
+        System.out.println("\tSelect 'r' to reset all saved data");
         System.out.println("\tSelect 'q' to quit the Finance Tracker");
     }
 
@@ -93,6 +117,15 @@ public class FinanceTracker {
         categories.put("miscellaneous", new Category("MISCELLANEOUS", 1000));
 
         input = new Scanner(System.in);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: resets all saved data, clearing categories and transactions
+    private void resetData() {
+        categories.clear();
+        initialize();
+        saveState();
+        System.out.println("All saved data has been reset.");
     }
 
     // MODIFIES: this
@@ -222,8 +255,6 @@ public class FinanceTracker {
         toChange.setBudget(Integer.parseInt(input.next()));
     }
 
-    // MODIFIES: transaction
-    // EFFECTS: allows user to edit, delete, or move a transaction
     // MODIFIES: transaction
     // EFFECTS: allows user to edit, delete, or move a transaction
     private void handleEditTransaction() {
@@ -451,12 +482,34 @@ public class FinanceTracker {
 
     // EFFECTS: saves the categories and their transactions to a json file
     private void saveState() {
-        // stub
+        try {
+            jsonWriter.open();
+            jsonWriter.write(categoriesToJson());
+            jsonWriter.close();
+            System.out.println("Data saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads the categories and their transactions from a json file
     private void loadState() {
-        // stub
+        try {
+            categories = jsonReader.readCategories();
+            System.out.println("Data loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    private JSONObject categoriesToJson() {
+        JSONObject json = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (Category category : categories.values()) {
+            jsonArray.put(category.toJson());
+        }
+        json.put("categories", jsonArray);
+        return json;
     }
 }
