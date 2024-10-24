@@ -44,18 +44,23 @@ public class Category {
         }
         return totalSpent >= this.getBudget();
     }
-    // EFFECTS: takes a category object and converts it into json format
+    
+    // EFFECTS: takes a category object and converts it into JSON format
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        // to fill
+        json.put("name", name);
+        json.put("budget", budget);
+        json.put("transactions", transactionsToJson());
         return json;
     }
 
-    // EFFECTS: takes the transaction hashmap and converts it into json array format
+    // EFFECTS: takes the transaction HashMap and converts it into a JSON array format
     public JSONArray transactionsToJson() {
-        JSONArray json = new JSONArray();
-        // to fill
-        return json;
+        JSONArray jsonArray = new JSONArray();
+        for (Transaction transaction : transactions.values()) {
+            jsonArray.put(transaction.toJson());
+        }
+        return jsonArray;
     }
 
     // Getter methods

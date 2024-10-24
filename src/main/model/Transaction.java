@@ -64,11 +64,20 @@ public class Transaction {
     public void setId(int newId) {
         this.id = newId;
     }
+    
+    // MODIFIES: this
+    // EFFECTS: sets a new date for the transaction
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }    
 
-    // EFFECTS: takes a transaction object and converts it into json format
+    // EFFECTS: takes a transaction object and converts it into JSON format
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        // to fill
+        json.put("id", id);
+        json.put("amount", amount);
+        json.put("description", description);
+        json.put("date", date.toString()); 
         return json;
     }
 
