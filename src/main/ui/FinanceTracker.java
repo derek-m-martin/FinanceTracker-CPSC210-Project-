@@ -497,12 +497,28 @@ public class FinanceTracker {
     private void loadState() {
         try {
             categories = jsonReader.readCategories();
+            updateNextTransactionId();
             System.out.println("Data loaded from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
+
+    // EFFECTS: finds the highest transaction ID in the loaded data and sets nextTransactionId to one higher
+    private void updateNextTransactionId() {
+        int highestId = -1;
+        for (Category category : categories.values()) {
+            for (Transaction transaction : category.getTransactions().values()) {
+                if (transaction.getId() > highestId) {
+                    highestId = transaction.getId();
+                }
+            }
+        }
+        nextTransactionId = highestId + 1;
+    }
+
+    // EFFECTS: takes all of the categories and converts them to a json object
     private JSONObject categoriesToJson() {
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
