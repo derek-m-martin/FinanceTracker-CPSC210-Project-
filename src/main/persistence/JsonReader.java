@@ -13,8 +13,10 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class JsonReader {
+
     private String source;
 
+    // EFFECTS: assigns variable to provided parameter
     public JsonReader(String source) {
         this.source = source;
     }
@@ -26,6 +28,7 @@ public class JsonReader {
         return parseCategories(jsonObject);
     }
 
+    // REQUIRES: a json object
     // EFFECTS: parses categories from JSON and returns a populated HashMap of categories
     private HashMap<String, Category> parseCategories(JSONObject jsonObject) {
         HashMap<String, Category> categories = new HashMap<>();
@@ -47,6 +50,7 @@ public class JsonReader {
         return categories;
     }
     
+    // REQUIRES: a valid category to be provided and a valid jsonarray of transactions
     // MODIFIES: the given Category object by adding the parsed transactions
     private void addTransactionsToCategory(Category category, JSONArray jsonTransactions) {
         for (Object obj : jsonTransactions) {
