@@ -13,7 +13,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("ProjectStarter/data/nofile.json");
+        JsonReader reader = new JsonReader("./data/nofile.json");
         try {
             HashMap<String, Category> categories = reader.readCategories();
             fail("IOException expected");
@@ -24,7 +24,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyCategories() {
-        JsonReader reader = new JsonReader("ProjectStarter/data/testReaderEmptyCategories.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyCategories.json");
         try {
             HashMap<String, Category> categories = reader.readCategories();
             assertEquals(5, categories.size());
@@ -36,7 +36,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderNonEmptyCategories() {
-        JsonReader reader = new JsonReader("ProjectStarter/data/testReaderNonEmptyCategories.json");
+        JsonReader reader = new JsonReader("./data/testReaderNonEmptyCategories.json");
         try {
             HashMap<String, Category> categories = reader.readCategories();
             assertEquals(5, categories.size());
