@@ -22,7 +22,7 @@ public class FinanceTracker {
     private Scanner input;
     private HashMap<String, Category> categories;
     private int nextTransactionId;
-    private static final String JSON_STORE = "./data/financetracker.json";
+    private static final String JSON_STORE = "./ProjectStarter/data/financetracker.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
