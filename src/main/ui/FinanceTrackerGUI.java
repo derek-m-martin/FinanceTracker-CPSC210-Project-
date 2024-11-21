@@ -40,6 +40,11 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: initializes the data fields
     private void initializeFields() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        categories = new HashMap<>();
+        nextTransactionId = 0;
+        initializeCategories();
     }
 
     // MODIFIES: this
@@ -72,11 +77,27 @@ public class FinanceTrackerGUI extends JFrame {
 
     // EFFECTS: saves the categories and their transactions to a json file
     public void saveState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(categoriesToJson());
+            jsonWriter.close();
+            JOptionPane.showMessageDialog(this, "Data saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads the categories and their transactions from a json file
     public void loadState() {
+        try {
+            categories = jsonReader.readCategories();
+            updateNextTransactionId();
+            JOptionPane.showMessageDialog(this, "Data loaded from " + JSON_STORE);
+            refreshAllPanels();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Unable to read from file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
@@ -91,6 +112,10 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: refreshes all panels after data load
     private void refreshAllPanels() {
+        addTransactionPanel.refreshCategories();
+        viewTransactionsPanel.refreshTransactions();
+        editTransactionPanel.refreshTransactions();
+        setBudgetPanel.refreshCategories();
     }
 
     // EFFECTS: returns the next transaction ID
