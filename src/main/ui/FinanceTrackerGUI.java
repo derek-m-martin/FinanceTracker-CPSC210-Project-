@@ -35,6 +35,11 @@ public class FinanceTrackerGUI extends JFrame {
 
     // EFFECTS: initializes the finance tracker GUI application
     public FinanceTrackerGUI() {
+        super("Finance Tracker");
+        initializeFields();
+        initializeGraphics();
+        initializeMenu();
+        promptLoadData();
     }
 
     // MODIFIES: this
@@ -79,7 +84,7 @@ public class FinanceTrackerGUI extends JFrame {
     public void saveState() {
         try {
             jsonWriter.open();
-            jsonWriter.write(categoriesToJson());
+     //       jsonWriter.write(categoriesToJson());
             jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved to " + JSON_STORE);
         } catch (FileNotFoundException e) {
@@ -106,8 +111,8 @@ public class FinanceTrackerGUI extends JFrame {
     }
 
     // EFFECTS: converts categories to JSON object
-    private org.json.JSONObject categoriesToJson() {
-    }
+   // private org.json.JSONObject categoriesToJson() {
+   // }
 
     // MODIFIES: this
     // EFFECTS: refreshes all panels after data load
