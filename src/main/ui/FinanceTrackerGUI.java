@@ -45,6 +45,11 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: initializes the spending categories
     private void initializeCategories() {
+        categories.put("food", new Category("FOOD", 1000));
+        categories.put("transportation", new Category("TRANSPORTATION", 1000));
+        categories.put("entertainment", new Category("ENTERTAINMENT", 1000));
+        categories.put("housing", new Category("HOUSING", 1000));
+        categories.put("miscellaneous", new Category("MISCELLANEOUS", 1000));
     }
 
     // MODIFIES: this
