@@ -38,6 +38,39 @@ public class EditTransactionPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
     private void initializeComponents() {
+        add(new JLabel("Transaction ID:"));
+        transactionIdField = new JTextField();
+        add(transactionIdField);
+
+        searchButton = new JButton("Search");
+        searchButton.addActionListener(new SearchTransactionListener());
+        add(new JLabel());
+        add(searchButton);
+
+        add(new JLabel("Amount:"));
+        amountField = new JTextField();
+        amountField.setEnabled(false);
+        add(amountField);
+
+        add(new JLabel("Description:"));
+        descriptionField = new JTextField();
+        descriptionField.setEnabled(false);
+        add(descriptionField);
+
+        add(new JLabel("Category:"));
+        categoryComboBox = new JComboBox<>();
+        categoryComboBox.setEnabled(false);
+        add(categoryComboBox);
+
+        updateButton = new JButton("Update");
+        updateButton.setEnabled(false);
+        updateButton.addActionListener(new UpdateTransactionListener());
+        deleteButton = new JButton("Delete");
+        deleteButton.setEnabled(false);
+        deleteButton.addActionListener(new DeleteTransactionListener());
+
+        add(updateButton);
+        add(deleteButton);
     }
 
     // MODIFIES: this
