@@ -34,11 +34,32 @@ public class AddTransactionPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
     private void initializeComponents() {
+        add(new JLabel("Transaction Amount:"));
+        amountField = new JTextField();
+        add(amountField);
+
+        add(new JLabel("Category:"));
+        categoryComboBox = new JComboBox<>();
+        refreshCategories();
+        add(categoryComboBox);
+
+        add(new JLabel("Description (Optional):"));
+        descriptionField = new JTextField();
+        add(descriptionField);
+
+        addButton = new JButton("Add Transaction");
+        addButton.addActionListener(new AddTransactionListener());
+        add(new JLabel()); // Empty label for spacing
+        add(addButton);
     }
 
     // MODIFIES: this
     // EFFECTS: refreshes the categories in the combo box
     public void refreshCategories() {
+        categoryComboBox.removeAllItems();
+        for (Category category : mainApp.getCategories().values()) {
+            categoryComboBox.addItem(category.getName());
+        }
     }
 
     // Listener class for adding transactions
