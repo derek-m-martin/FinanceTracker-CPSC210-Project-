@@ -65,6 +65,38 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: initializes the main frame and adds components
     private void initializeGraphics() {
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+        addTransactionPanel = new AddTransactionPanel(this);
+        viewTransactionsPanel = new ViewTransactionsPanel(this);
+        editTransactionPanel = new EditTransactionPanel(this);
+        setBudgetPanel = new SetBudgetPanel(this);
+        summaryPanel = new SummaryPanel(this);
+
+        // create tabbed pane
+        tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Add Transaction", addTransactionPanel);
+        tabbedPane.addTab("View Transactions", viewTransactionsPanel);
+        tabbedPane.addTab("Edit Transaction", editTransactionPanel);
+        tabbedPane.addTab("Set Budget", setBudgetPanel);
+        tabbedPane.addTab("Summary", summaryPanel);
+
+        add(tabbedPane, BorderLayout.CENTER);
+
+        // visual part!
+        ImagePanel imagePanel = new ImagePanel();
+        add(imagePanel, BorderLayout.NORTH);
+
+        // save prompt
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                promptSaveData();
+            }
+        });
+
+        setVisible(true);
     }
 
     // MODIFIES: this
