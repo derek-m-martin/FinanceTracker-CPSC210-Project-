@@ -10,6 +10,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+// ** SOURCE I REFERENCED TO HELP WITH THIS PHASE!!! ** //
+// Link: https://www.youtube.com/watch?v=Kmgo00avvEw //
+// A bit long but went real in depth to many different components //
+// of swing and made this whole phase way easier than hitting //
+// stackoverflow every 5 minutes //
+
 // A panel to display spending summaries over a selected time period
 public class SummaryPanel extends JPanel {
 

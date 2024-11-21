@@ -8,6 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// ** SOURCE I REFERENCED TO HELP WITH THIS PHASE!!! ** //
+// Link: https://www.youtube.com/watch?v=Kmgo00avvEw //
+// A bit long but went real in depth to many different components //
+// of swing and made this whole phase way easier than hitting //
+// stackoverflow every 5 minutes //
+
 // A panel that allows users to add new transactions
 public class AddTransactionPanel extends JPanel {
 
