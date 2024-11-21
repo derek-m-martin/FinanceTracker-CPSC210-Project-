@@ -5,7 +5,9 @@ import java.awt.*;
 
 // A custom panel to display an image (visual component)
 public class ImagePanel extends JPanel {
-    
+
+    private Image image;
+
     // EFFECTS: loads the image to be displayed
     public ImagePanel() {
     }
