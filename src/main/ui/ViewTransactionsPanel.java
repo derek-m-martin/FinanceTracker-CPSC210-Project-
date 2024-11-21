@@ -13,6 +13,12 @@ import java.util.List;
 // A panel to view, filter, and sort transactions
 public class ViewTransactionsPanel extends JPanel {
 
+    private FinanceTrackerGUI mainApp;
+    private JTable transactionTable;
+    private DefaultTableModel tableModel;
+    private JComboBox<String> filterComboBox;
+    private JButton filterButton;
+
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the ViewTransactionsPanel
     public ViewTransactionsPanel(FinanceTrackerGUI mainApp) {
