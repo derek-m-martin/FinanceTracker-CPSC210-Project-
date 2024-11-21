@@ -11,6 +11,12 @@ import java.awt.event.ActionListener;
 // A panel that allows users to add new transactions
 public class AddTransactionPanel extends JPanel {
 
+    private FinanceTrackerGUI mainApp;
+    private JTextField amountField;
+    private JComboBox<String> categoryComboBox;
+    private JTextField descriptionField;
+    private JButton addButton;
+
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the AddTransactionPanel
     public AddTransactionPanel(FinanceTrackerGUI mainApp) {
