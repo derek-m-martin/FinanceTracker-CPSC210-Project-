@@ -15,6 +15,18 @@ import java.util.HashMap;
 // The main GUI class for the Finance Tracker application
 public class FinanceTrackerGUI extends JFrame {
 
+    private static final String JSON_STORE = "./ProjectStarter/data/financetracker.json";
+    private HashMap<String, Category> categories;
+    private int nextTransactionId;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private JTabbedPane tabbedPane;
+    private AddTransactionPanel addTransactionPanel;
+    private ViewTransactionsPanel viewTransactionsPanel;
+    private EditTransactionPanel editTransactionPanel;
+    private SetBudgetPanel setBudgetPanel;
+    private SummaryPanel summaryPanel;
+
     // EFFECTS: initializes the finance tracker GUI application
     public FinanceTrackerGUI() {
     }
