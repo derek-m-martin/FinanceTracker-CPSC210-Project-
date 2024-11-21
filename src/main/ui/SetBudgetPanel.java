@@ -18,6 +18,9 @@ public class SetBudgetPanel extends JPanel {
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the SetBudgetPanel
     public SetBudgetPanel(FinanceTrackerGUI mainApp) {
+        this.mainApp = mainApp;
+        setLayout(new GridLayout(3, 2));
+        initializeComponents();
     }
 
     // MODIFIES: this

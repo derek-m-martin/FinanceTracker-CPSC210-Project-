@@ -24,6 +24,9 @@ public class EditTransactionPanel extends JPanel {
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the EditTransactionPanel
     public EditTransactionPanel(FinanceTrackerGUI mainApp) {
+        this.mainApp = mainApp;
+        setLayout(new GridLayout(7, 2));
+        initializeComponents();
     }
 
     // MODIFIES: this

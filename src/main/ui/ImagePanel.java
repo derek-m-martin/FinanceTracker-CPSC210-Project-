@@ -10,6 +10,9 @@ public class ImagePanel extends JPanel {
 
     // EFFECTS: loads the image to be displayed
     public ImagePanel() {
+        ImageIcon icon = new ImageIcon("tbd until i mock up an image");
+        image = icon.getImage();
+        setPreferredSize(new Dimension(800, 100));
     }
 
     // EFFECTS: paints the image onto the panel

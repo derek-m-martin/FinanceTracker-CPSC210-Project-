@@ -22,6 +22,10 @@ public class ViewTransactionsPanel extends JPanel {
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the ViewTransactionsPanel
     public ViewTransactionsPanel(FinanceTrackerGUI mainApp) {
+        this.mainApp = mainApp;
+        setLayout(new BorderLayout());
+        initializeComponents();
+        refreshTransactions();
     }
 
     // MODIFIES: this

@@ -22,6 +22,9 @@ public class SummaryPanel extends JPanel {
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the SummaryPanel
     public SummaryPanel(FinanceTrackerGUI mainApp) {
+        this.mainApp = mainApp;
+        setLayout(new BorderLayout());
+        initializeComponents();
     }
 
     // MODIFIES: this
