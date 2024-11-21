@@ -95,13 +95,16 @@ public class FinanceTrackerGUI extends JFrame {
 
     // EFFECTS: returns the next transaction ID
     public int getNextTransactionId() {
+        return nextTransactionId++;
     }
 
     // EFFECTS: finds and returns the category with the given name
     public Category findCategory(String name) {
+        return categories.get(name.toLowerCase());
     }
 
     // EFFECTS: returns all categories
     public HashMap<String, Category> getCategories() {
+        return categories;
     }
 }
