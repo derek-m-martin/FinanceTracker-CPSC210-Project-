@@ -11,6 +11,14 @@ import java.awt.event.ActionListener;
 // A panel to edit or delete existing transactions
 public class EditTransactionPanel extends JPanel {
 
+    private FinanceTrackerGUI mainApp;
+    private JTextField transactionIdField;
+    private JButton searchButton;
+    private JTextField amountField;
+    private JTextField descriptionField;
+    private JComboBox<String> categoryComboBox;
+    private JButton updateButton;
+    private JButton deleteButton;
     private Transaction currentTransaction;
 
     // REQUIRES: mainApp is not null
