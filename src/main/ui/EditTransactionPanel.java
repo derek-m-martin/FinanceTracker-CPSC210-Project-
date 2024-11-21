@@ -43,6 +43,10 @@ public class EditTransactionPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: refreshes the categories in the combo box
     public void refreshTransactions() {
+        categoryComboBox.removeAllItems();
+        for (Category category : mainApp.getCategories().values()) {
+            categoryComboBox.addItem(category.getName());
+        }
     }
 
     // Listener class for searching transactions
@@ -67,5 +71,11 @@ public class EditTransactionPanel extends JPanel {
 
     // EFFECTS: finds and returns the transaction with the given ID
     private Transaction findTransaction(int id) {
+        for (Category category : mainApp.getCategories().values()) {
+            if (category.getTransactions().containsKey(id)) {
+                return category.getTransactions().get(id);
+            }
+        }
+        return null;
     }
 }
