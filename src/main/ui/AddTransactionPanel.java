@@ -23,6 +23,11 @@ public class AddTransactionPanel extends JPanel {
     }
 
     // MODIFIES: this
+    // EFFECTS: initializes and adds components to the panel
+    private void initializeComponents() {
+    }
+
+    // MODIFIES: this
     // EFFECTS: refreshes the categories in the combo box
     public void refreshCategories() {
     }
