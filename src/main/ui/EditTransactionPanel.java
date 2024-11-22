@@ -26,7 +26,6 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
     private JButton updateButton;
     private JButton deleteButton;
     private Transaction currentTransaction;
-    
 
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the EditTransactionPanel
@@ -38,6 +37,7 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
+    @SuppressWarnings("methodlength")
     private void initializeComponents() {
         add(new JLabel("Transaction ID:"));
         transactionIdField = new JTextField();
@@ -76,7 +76,6 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
         searchButton.setActionCommand("search");
         updateButton.setActionCommand("update");
         deleteButton.setActionCommand("delete");
-
     }
 
     // MODIFIES: this
@@ -88,8 +87,8 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
         }
     }
 
-     // MODIFIES: this, currentTransaction
-     // EFFECTS: Handles button click events based on the ActionCommand.
+    // MODIFIES: this, currentTransaction
+    // EFFECTS: Handles button click events based on the ActionCommand.
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -169,14 +168,14 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
     // EFFECTS: deletes the current transaction
     private void handleDelete() {
         int confirm = JOptionPane.showConfirmDialog(EditTransactionPanel.this,
-                    "Are you sure you want to delete this transaction?",
-                    "Confirm Delete", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                currentTransaction.deleteTransaction();
-                JOptionPane.showMessageDialog(EditTransactionPanel.this,
-                        "Transaction deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                resetFields();
-            }
+                "Are you sure you want to delete this transaction?",
+                "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            currentTransaction.deleteTransaction();
+            JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                    "Transaction deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            resetFields();
+        }
     }
 
     // EFFECTS: resets the input fields
