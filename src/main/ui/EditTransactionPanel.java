@@ -26,6 +26,7 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
     private JButton updateButton;
     private JButton deleteButton;
     private Transaction currentTransaction;
+    
 
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the EditTransactionPanel
@@ -71,6 +72,11 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
 
         add(updateButton);
         add(deleteButton);
+
+        searchButton.setActionCommand("search");
+        updateButton.setActionCommand("update");
+        deleteButton.setActionCommand("delete");
+
     }
 
     // MODIFIES: this
