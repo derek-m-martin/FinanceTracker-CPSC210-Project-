@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class FinanceTrackerGUI extends JFrame {
 
-    private static final String JSON_STORE = "./ProjectStarter/data/financetracker.json";
+    private static final String JSON_STORE = "data/financetracker.json";
     private HashMap<String, Category> categories;
     private int nextTransactionId;
     private JsonWriter jsonWriter;

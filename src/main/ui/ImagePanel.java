@@ -15,7 +15,7 @@ public class ImagePanel extends JPanel {
 
     // EFFECTS: loads the image to be displayed
     public ImagePanel() {
-        ImageIcon icon = new ImageIcon("./ProjectStarter/data/stonkscombined.jpg");
+        ImageIcon icon = new ImageIcon("data/stonkscombined.jpg");
         image = icon.getImage();
         setPreferredSize(new Dimension(800, 250));
     }
