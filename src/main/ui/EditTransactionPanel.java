@@ -101,20 +101,88 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: searches for a transaction and populates fields
     private void handleSearch() {
+        try {
+            int transactionId = Integer.parseInt(transactionIdField.getText());
+            currentTransaction = findTransaction(transactionId);
+            if (currentTransaction != null) {
+                amountField.setText(String.valueOf(currentTransaction.getAmount()));
+                descriptionField.setText(currentTransaction.getDescription());
+                refreshTransactions();
+                categoryComboBox.setSelectedItem(currentTransaction.getCategory().getName());
 
+                amountField.setEnabled(true);
+                descriptionField.setEnabled(true);
+                categoryComboBox.setEnabled(true);
+                updateButton.setEnabled(true);
+                deleteButton.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                        "Transaction not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                    "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    // MODIFIES: currentTransaction
+    // EFFECTS: updates the transaction with new details
     private void handleUpdate() {
-        
+        try {
+            int newAmount = Integer.parseInt(amountField.getText());
+            String newDescription = descriptionField.getText();
+            String newCategoryName = (String) categoryComboBox.getSelectedItem();
+            Category newCategory = mainApp.findCategory(newCategoryName);
+
+            if (newCategory == null) {
+                JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                        "Category not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            currentTransaction.getCategory().setBudget(
+                    currentTransaction.getCategory().getBudget() + currentTransaction.getAmount());
+            currentTransaction.setAmount(newAmount);
+            currentTransaction.setDescription(newDescription);
+            currentTransaction.moveTransaction(newCategory);
+            currentTransaction.getCategory().setBudget(
+                    currentTransaction.getCategory().getBudget() - newAmount);
+
+            JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                    "Transaction updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                    "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    // MODIFIES: mainApp
+    // EFFECTS: deletes the current transaction
     private void handleDelete() {
-        
+        int confirm = JOptionPane.showConfirmDialog(EditTransactionPanel.this,
+                    "Are you sure you want to delete this transaction?",
+                    "Confirm Delete", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                currentTransaction.deleteTransaction();
+                JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                        "Transaction deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                resetFields();
+            }
     }
 
     // EFFECTS: resets the input fields
     private void resetFields() {
+        transactionIdField.setText("");
+        amountField.setText("");
+        descriptionField.setText("");
+        amountField.setEnabled(false);
+        descriptionField.setEnabled(false);
+        categoryComboBox.setEnabled(false);
+        updateButton.setEnabled(false);
+        deleteButton.setEnabled(false);
     }
 
     // EFFECTS: finds and returns the transaction with the given ID
