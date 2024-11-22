@@ -30,7 +30,6 @@ public class FinanceTrackerGUI extends JFrame {
     private AddTransactionPanel addTransactionPanel;
     private ViewTransactionsPanel viewTransactionsPanel;
     private EditTransactionPanel editTransactionPanel;
-    private SetBudgetPanel setBudgetPanel;
     private SummaryPanel summaryPanel;
 
     // EFFECTS: initializes the finance tracker GUI application
@@ -72,7 +71,6 @@ public class FinanceTrackerGUI extends JFrame {
         addTransactionPanel = new AddTransactionPanel(this);
         viewTransactionsPanel = new ViewTransactionsPanel(this);
         editTransactionPanel = new EditTransactionPanel(this);
-        setBudgetPanel = new SetBudgetPanel(this);
         summaryPanel = new SummaryPanel(this);
 
         // create tabbed pane
@@ -80,7 +78,6 @@ public class FinanceTrackerGUI extends JFrame {
         tabbedPane.addTab("Add Transaction", addTransactionPanel);
         tabbedPane.addTab("View Transactions", viewTransactionsPanel);
         tabbedPane.addTab("Edit Transaction", editTransactionPanel);
-        tabbedPane.addTab("Set Budget", setBudgetPanel);
         tabbedPane.addTab("Summary", summaryPanel);
 
         add(tabbedPane, BorderLayout.CENTER);
@@ -102,21 +99,46 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: initializes the menu bar with save and load options
     private void initializeMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+
+        JMenuItem saveItem = new JMenuItem("Save Data");
+        saveItem.addActionListener(e -> saveState());
+        JMenuItem loadItem = new JMenuItem("Load Data");
+        loadItem.addActionListener(e -> loadState());
+
+        fileMenu.add(saveItem);
+        fileMenu.add(loadItem);
+        menuBar.add(fileMenu);
+        setJMenuBar(menuBar);
     }
 
     // EFFECTS: prompts the user to load data at startup
     private void promptLoadData() {
+        int result = JOptionPane.showConfirmDialog(this,
+                "Would you like to load your previous saved data?", "Load Data",
+                JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            loadState();
+        }
     }
 
     // EFFECTS: prompts the user to save data before exiting
     private void promptSaveData() {
+        int result = JOptionPane.showConfirmDialog(this,
+                "Would you like to save your data before quitting?", "Save Data",
+                JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            saveState();
+        }
+        System.exit(0);
     }
 
     // EFFECTS: saves the categories and their transactions to a json file
     public void saveState() {
         try {
             jsonWriter.open();
-     //       jsonWriter.write(categoriesToJson());
+            jsonWriter.write(categoriesToJson());
             jsonWriter.close();
             JOptionPane.showMessageDialog(this, "Data saved to " + JSON_STORE);
         } catch (FileNotFoundException e) {
@@ -168,7 +190,6 @@ public class FinanceTrackerGUI extends JFrame {
         addTransactionPanel.refreshCategories();
         viewTransactionsPanel.refreshTransactions();
         editTransactionPanel.refreshTransactions();
-        setBudgetPanel.refreshCategories();
     }
 
     // EFFECTS: returns the next transaction ID
