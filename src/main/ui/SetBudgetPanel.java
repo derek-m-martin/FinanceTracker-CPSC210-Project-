@@ -59,5 +59,17 @@ public class SetBudgetPanel extends JPanel implements ActionListener {
     // MODIFIES: mainApp
         // EFFECTS: sets the new budget for the selected category
     public void actionPerformed(ActionEvent e) {
+        try {
+            String categoryName = (String) categoryComboBox.getSelectedItem();
+            int newBudget = Integer.parseInt(budgetField.getText());
+            Category category = mainApp.findCategory(categoryName);
+            category.setBudget(newBudget);
+            JOptionPane.showMessageDialog(SetBudgetPanel.this,
+                    "Budget updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            budgetField.setText("");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(SetBudgetPanel.this,
+                    "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
