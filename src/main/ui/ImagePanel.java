@@ -23,5 +23,7 @@ public class ImagePanel extends JPanel {
 
     // EFFECTS: paints the image onto the panel
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
     }
 }
