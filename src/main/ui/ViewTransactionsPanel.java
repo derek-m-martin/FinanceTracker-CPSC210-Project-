@@ -37,6 +37,19 @@ public class ViewTransactionsPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
     private void initializeComponents() {
+        tableModel = new DefaultTableModel();
+        transactionTable = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(transactionTable);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel filterPanel = new JPanel();
+        filterComboBox = new JComboBox<>(new String[]{"All", "Oldest", "Newest", "Category"});
+        filterButton = new JButton("Apply Filter");
+        filterButton.addActionListener(e -> applyFilter());
+        filterPanel.add(new JLabel("Filter By:"));
+        filterPanel.add(filterComboBox);
+        filterPanel.add(filterButton);
+        add(filterPanel, BorderLayout.NORTH);
     }
 
     // MODIFIES: this

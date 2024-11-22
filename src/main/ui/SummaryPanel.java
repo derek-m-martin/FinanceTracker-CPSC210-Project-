@@ -36,6 +36,25 @@ public class SummaryPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
     private void initializeComponents() {
+        JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+        inputPanel.add(new JLabel("Start Date (dd/mm/yyyy):"));
+        startDateField = new JTextField();
+        inputPanel.add(startDateField);
+
+        inputPanel.add(new JLabel("End Date (dd/mm/yyyy):"));
+        endDateField = new JTextField();
+        inputPanel.add(endDateField);
+
+        generateButton = new JButton("Generate Summary");
+        generateButton.addActionListener(e -> generateSummary());
+        inputPanel.add(new JLabel());
+        inputPanel.add(generateButton);
+
+        add(inputPanel, BorderLayout.NORTH);
+
+        summaryArea = new JTextArea();
+        summaryArea.setEditable(false);
+        add(new JScrollPane(summaryArea), BorderLayout.CENTER);
     }
 
     // EFFECTS: generates and displays the spending summary
