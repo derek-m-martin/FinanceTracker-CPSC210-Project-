@@ -32,6 +32,19 @@ public class SetBudgetPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
     private void initializeComponents() {
+        add(new JLabel("Select Category:"));
+        categoryComboBox = new JComboBox<>();
+        refreshCategories();
+        add(categoryComboBox);
+
+        add(new JLabel("New Budget Amount:"));
+        budgetField = new JTextField();
+        add(budgetField);
+
+        setBudgetButton = new JButton("Set Budget");
+        setBudgetButton.addActionListener(new SetBudgetListener());
+        add(new JLabel());
+        add(setBudgetButton);
     }
 
     // MODIFIES: this
