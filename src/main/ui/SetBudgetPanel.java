@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 // stackoverflow every 5 minutes //
 
 // A panel to set budgets for categories
-public class SetBudgetPanel extends JPanel {
+public class SetBudgetPanel extends JPanel implements ActionListener {
 
     private FinanceTrackerGUI mainApp;
     private JComboBox<String> categoryComboBox;
@@ -42,7 +42,7 @@ public class SetBudgetPanel extends JPanel {
         add(budgetField);
 
         setBudgetButton = new JButton("Set Budget");
-        setBudgetButton.addActionListener(new SetBudgetListener());
+        setBudgetButton.addActionListener(this);
         add(new JLabel());
         add(setBudgetButton);
     }
@@ -56,7 +56,8 @@ public class SetBudgetPanel extends JPanel {
         }
     }
 
-    // Listener class for setting budgets
-    private class SetBudgetListener implements ActionListener {
+    // MODIFIES: mainApp
+        // EFFECTS: sets the new budget for the selected category
+    public void actionPerformed(ActionEvent e) {
     }
 }
