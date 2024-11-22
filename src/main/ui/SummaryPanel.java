@@ -16,7 +16,6 @@ import java.util.List;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// A panel to display spending summaries over a selected time period
 public class SummaryPanel extends JPanel {
 
     private FinanceTrackerGUI mainApp;
@@ -87,6 +86,8 @@ public class SummaryPanel extends JPanel {
         }
     }
 
+    // EFFECTS: is called by generateSummary and then runs a forloop which then updates the 
+    // corresponding category amount
     private void generateSummaryHelper(List<Transaction> transactions) {
         for (Transaction t : transactions) {
             int amount = t.getAmount();

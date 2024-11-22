@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// A panel to edit or delete existing transactions
 public class EditTransactionPanel extends JPanel implements ActionListener {
 
     private FinanceTrackerGUI mainApp;

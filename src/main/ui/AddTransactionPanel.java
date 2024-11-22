@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// A panel that allows users to add new transactions
 public class AddTransactionPanel extends JPanel implements ActionListener {
 
     private FinanceTrackerGUI mainApp;

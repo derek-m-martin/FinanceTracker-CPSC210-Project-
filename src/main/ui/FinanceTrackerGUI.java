@@ -18,7 +18,6 @@ import java.util.HashMap;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// The main GUI class for the Finance Tracker application
 public class FinanceTrackerGUI extends JFrame {
 
     private static final String JSON_STORE = "./ProjectStarter/data/financetracker.json";

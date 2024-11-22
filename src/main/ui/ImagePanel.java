@@ -9,7 +9,6 @@ import java.awt.*;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// A custom panel to display an image (visual component)
 public class ImagePanel extends JPanel {
 
     private Image image;
