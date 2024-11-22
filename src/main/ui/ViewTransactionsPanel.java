@@ -16,7 +16,6 @@ import java.util.List;
 // of swing and made this whole phase way easier than hitting //
 // stackoverflow every 5 minutes //
 
-// A panel to view, filter, and sort transactions
 public class ViewTransactionsPanel extends JPanel {
 
     private FinanceTrackerGUI mainApp;
@@ -55,9 +54,46 @@ public class ViewTransactionsPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: refreshes the transactions displayed in the table
     public void refreshTransactions() {
+        tableModel.setRowCount(0);
+        tableModel.setColumnIdentifiers(new String[]{"ID", "Amount", "Description", "Category", "Date"});
+        for (Category category : mainApp.getCategories().values()) {
+            for (Transaction transaction : category.getTransactions().values()) {
+                tableModel.addRow(new Object[]{
+                        transaction.getId(),
+                        transaction.getAmount(),
+                        transaction.getDescription(),
+                        transaction.getCategory().getName(),
+                        transaction.getDate()
+                });
+            }
+        }
     }
 
     // EFFECTS: applies the selected filter to the transactions
     private void applyFilter() {
+        String filter = (String) filterComboBox.getSelectedItem();
+        List<Transaction> transactionList = new ArrayList<>();
+        for (Category category : mainApp.getCategories().values()) {
+            transactionList.addAll(category.getTransactions().values());
+        }
+
+        if (filter.equals("Oldest")) {
+            transactionList.sort(Comparator.comparingInt(Transaction::getId));
+        } else if (filter.equals("Newest")) {
+            transactionList.sort(Comparator.comparingInt(Transaction::getId).reversed());
+        } else if (filter.equals("Category")) {
+            transactionList.sort(Comparator.comparing(t -> t.getCategory().getName()));
+        }
+
+        tableModel.setRowCount(0);
+        for (Transaction transaction : transactionList) {
+            tableModel.addRow(new Object[]{
+                    transaction.getId(),
+                    transaction.getAmount(),
+                    transaction.getDescription(),
+                    transaction.getCategory().getName(),
+                    transaction.getDate()
+            });
+        }
     }
 }
