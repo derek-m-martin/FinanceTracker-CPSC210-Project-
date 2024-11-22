@@ -59,14 +59,78 @@ public class SummaryPanel extends JPanel {
 
     // EFFECTS: generates and displays the spending summary
     private void generateSummary() {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate startDate = LocalDate.parse(startDateField.getText(), formatter);
+            LocalDate endDate = LocalDate.parse(endDateField.getText(), formatter);
+
+            if (startDate.isAfter(endDate)) {
+                LocalDate temp = startDate;
+                startDate = endDate;
+                endDate = temp;
+            }
+
+            List<Transaction> transactions = grabTransactions(startDate, endDate);
+            int foodAmt = 0;
+            int entertainmentAmt = 0;
+            int transportationAmt = 0;
+            int housingAmt = 0;
+            int miscellaneousAmt = 0;
+
+            for (Transaction t : transactions) {
+                int amount = t.getAmount();
+                String categoryName = t.getCategory().getName().toLowerCase();
+                switch (categoryName) {
+                    case "food":
+                        foodAmt += amount;
+                        break;
+                    case "housing":
+                        housingAmt += amount;
+                        break;
+                    case "entertainment":
+                        entertainmentAmt += amount;
+                        break;
+                    case "transportation":
+                        transportationAmt += amount;
+                        break;
+                    default:
+                        miscellaneousAmt += amount;
+                        break;
+                }
+            }
+
+            displaySummary(startDate, endDate, foodAmt, housingAmt, entertainmentAmt,
+                    transportationAmt, miscellaneousAmt);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(SummaryPanel.this,
+                    "Invalid date format.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // EFFECTS: displays the spending summary in the text area
     private void displaySummary(LocalDate startDate, LocalDate endDate,
         int food, int housing, int entertainment, int transportation, int miscellaneous) {
+            summaryArea.setText("");
+        summaryArea.append("Between " + startDate + " and " + endDate + " you:\n\n");
+        summaryArea.append("Spent $" + food + " on food\n");
+        summaryArea.append("Spent $" + housing + " on housing\n");
+        summaryArea.append("Spent $" + entertainment + " on entertainment\n");
+        summaryArea.append("Spent $" + transportation + " on transportation\n");
+        summaryArea.append("Spent $" + miscellaneous + " on miscellaneous\n");
     }
 
     // EFFECTS: retrieves transactions between the given dates
     private List<Transaction> grabTransactions(LocalDate start, LocalDate end) {
+        List<Transaction> result = new ArrayList<>();
+        for (Category category : mainApp.getCategories().values()) {
+            for (Transaction transaction : category.getTransactions().values()) {
+                LocalDate transDate = transaction.getDate();
+                if ((transDate.isAfter(start) || transDate.equals(start))
+                        && (transDate.isBefore(end) || transDate.equals(end))) {
+                    result.add(transaction);
+                }
+            }
+        }
+        return result;
     }
 }
