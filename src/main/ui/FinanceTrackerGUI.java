@@ -140,10 +140,26 @@ public class FinanceTrackerGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: updates the next transaction ID based on loaded data
     private void updateNextTransactionId() {
+        int highestId = -1;
+        for (Category category : categories.values()) {
+            for (Transaction transaction : category.getTransactions().values()) {
+                if (transaction.getId() > highestId) {
+                    highestId = transaction.getId();
+                }
+            }
+        }
+        nextTransactionId = highestId + 1;
     }
 
     // EFFECTS: converts categories to JSON object
     private org.json.JSONObject categoriesToJson() {
+        org.json.JSONObject json = new org.json.JSONObject();
+        org.json.JSONArray jsonArray = new org.json.JSONArray();
+        for (Category category : categories.values()) {
+            jsonArray.put(category.toJson());
+        }
+        json.put("categories", jsonArray);
+        return json;
     }
 
     // MODIFIES: this
