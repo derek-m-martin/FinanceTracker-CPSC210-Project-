@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 // stackoverflow every 5 minutes //
 
 // A panel to edit or delete existing transactions
-public class EditTransactionPanel extends JPanel {
+public class EditTransactionPanel extends JPanel implements ActionListener {
 
     private FinanceTrackerGUI mainApp;
     private JTextField transactionIdField;
@@ -43,7 +43,7 @@ public class EditTransactionPanel extends JPanel {
         add(transactionIdField);
 
         searchButton = new JButton("Search");
-        searchButton.addActionListener(new SearchTransactionListener());
+        searchButton.addActionListener(this);
         add(new JLabel());
         add(searchButton);
 
@@ -64,10 +64,10 @@ public class EditTransactionPanel extends JPanel {
 
         updateButton = new JButton("Update");
         updateButton.setEnabled(false);
-        updateButton.addActionListener(new UpdateTransactionListener());
+        updateButton.addActionListener(this);
         deleteButton = new JButton("Delete");
         deleteButton.setEnabled(false);
-        deleteButton.addActionListener(new DeleteTransactionListener());
+        deleteButton.addActionListener(this);
 
         add(updateButton);
         add(deleteButton);
@@ -82,20 +82,35 @@ public class EditTransactionPanel extends JPanel {
         }
     }
 
-    // Listener class for searching transactions
-    private class SearchTransactionListener implements ActionListener {
-    }
+     // MODIFIES: this, currentTransaction
+     // EFFECTS: Handles button click events based on the ActionCommand.
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
 
-    // Listener class for updating transactions
-    private class UpdateTransactionListener implements ActionListener {
-        // MODIFIES: currentTransaction
-        // EFFECTS: updates the transaction with new details
-        public void actionPerformed(ActionEvent e) {
+        switch (command) {
+            case "search":
+                handleSearch();
+                break;
+            case "update":
+                handleUpdate();
+                break;
+            case "delete":
+                handleDelete();
+                break;
         }
     }
 
-    // Listener class for deleting transactions
-    private class DeleteTransactionListener implements ActionListener {
+    private void handleSearch() {
+
+    }
+
+    private void handleUpdate() {
+        
+    }
+
+    private void handleDelete() {
+        
     }
 
     // EFFECTS: resets the input fields
