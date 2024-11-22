@@ -24,6 +24,11 @@ public class SummaryPanel extends JPanel {
     private JTextField endDateField;
     private JButton generateButton;
     private JTextArea summaryArea;
+    private int foodAmt = 0;
+    private int entertainmentAmt = 0;
+    private int transportationAmt = 0;
+    private int housingAmt = 0;
+    private int miscellaneousAmt = 0;
 
     // REQUIRES: mainApp is not null
     // EFFECTS: constructs the SummaryPanel
@@ -71,14 +76,8 @@ public class SummaryPanel extends JPanel {
             }
 
             List<Transaction> transactions = grabTransactions(startDate, endDate);
-            int foodAmt = 0;
-            int entertainmentAmt = 0;
-            int transportationAmt = 0;
-            int housingAmt = 0;
-            int miscellaneousAmt = 0;
 
-            generateSummaryHelper(transactions, foodAmt, entertainmentAmt, transportationAmt, housingAmt,
-                    miscellaneousAmt);
+            generateSummaryHelper(transactions);
 
             displaySummary(startDate, endDate, foodAmt, housingAmt, entertainmentAmt,
                     transportationAmt, miscellaneousAmt);
@@ -88,8 +87,7 @@ public class SummaryPanel extends JPanel {
         }
     }
 
-    private void generateSummaryHelper(List<Transaction> transactions, int foodAmt, int entertainmentAmt,
-            int transportationAmt, int housingAmt, int miscellaneousAmt) {
+    private void generateSummaryHelper(List<Transaction> transactions) {
         for (Transaction t : transactions) {
             int amount = t.getAmount();
             String categoryName = t.getCategory().getName().toLowerCase();
