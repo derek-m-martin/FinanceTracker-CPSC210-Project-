@@ -143,8 +143,8 @@ public class FinanceTrackerGUI extends JFrame {
     }
 
     // EFFECTS: converts categories to JSON object
-   // private org.json.JSONObject categoriesToJson() {
-   // }
+    private org.json.JSONObject categoriesToJson() {
+    }
 
     // MODIFIES: this
     // EFFECTS: refreshes all panels after data load
