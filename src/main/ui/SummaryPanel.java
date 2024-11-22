@@ -77,27 +77,8 @@ public class SummaryPanel extends JPanel {
             int housingAmt = 0;
             int miscellaneousAmt = 0;
 
-            for (Transaction t : transactions) {
-                int amount = t.getAmount();
-                String categoryName = t.getCategory().getName().toLowerCase();
-                switch (categoryName) {
-                    case "food":
-                        foodAmt += amount;
-                        break;
-                    case "housing":
-                        housingAmt += amount;
-                        break;
-                    case "entertainment":
-                        entertainmentAmt += amount;
-                        break;
-                    case "transportation":
-                        transportationAmt += amount;
-                        break;
-                    default:
-                        miscellaneousAmt += amount;
-                        break;
-                }
-            }
+            generateSummaryHelper(transactions, foodAmt, entertainmentAmt, transportationAmt, housingAmt,
+                    miscellaneousAmt);
 
             displaySummary(startDate, endDate, foodAmt, housingAmt, entertainmentAmt,
                     transportationAmt, miscellaneousAmt);
@@ -107,10 +88,35 @@ public class SummaryPanel extends JPanel {
         }
     }
 
+    private void generateSummaryHelper(List<Transaction> transactions, int foodAmt, int entertainmentAmt,
+            int transportationAmt, int housingAmt, int miscellaneousAmt) {
+        for (Transaction t : transactions) {
+            int amount = t.getAmount();
+            String categoryName = t.getCategory().getName().toLowerCase();
+            switch (categoryName) {
+                case "food":
+                    foodAmt += amount;
+                    break;
+                case "housing":
+                    housingAmt += amount;
+                    break;
+                case "entertainment":
+                    entertainmentAmt += amount;
+                    break;
+                case "transportation":
+                    transportationAmt += amount;
+                    break;
+                default:
+                    miscellaneousAmt += amount;
+                    break;
+            }
+        }
+    }
+
     // EFFECTS: displays the spending summary in the text area
     private void displaySummary(LocalDate startDate, LocalDate endDate,
-        int food, int housing, int entertainment, int transportation, int miscellaneous) {
-            summaryArea.setText("");
+            int food, int housing, int entertainment, int transportation, int miscellaneous) {
+        summaryArea.setText("");
         summaryArea.append("Between " + startDate + " and " + endDate + " you:\n\n");
         summaryArea.append("Spent $" + food + " on food\n");
         summaryArea.append("Spent $" + housing + " on housing\n");
