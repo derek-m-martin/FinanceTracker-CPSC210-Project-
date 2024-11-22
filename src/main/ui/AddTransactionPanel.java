@@ -70,11 +70,6 @@ public class AddTransactionPanel extends JPanel implements ActionListener {
             String categoryName = (String) categoryComboBox.getSelectedItem();
             String description = descriptionField.getText();
             Category category = mainApp.findCategory(categoryName);
-            if (category == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Category not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
             Transaction transaction = new Transaction(mainApp.getNextTransactionId(), amount, category);
             transaction.setDescription(description);
             category.getTransactions().put(transaction.getId(), transaction);
