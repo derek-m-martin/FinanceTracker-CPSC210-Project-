@@ -37,6 +37,10 @@ public class SetBudgetPanel extends JPanel {
     // MODIFIES: this
     // EFFECTS: refreshes the categories in the combo box
     public void refreshCategories() {
+        categoryComboBox.removeAllItems();
+        for (Category category : mainApp.getCategories().values()) {
+            categoryComboBox.addItem(category.getName());
+        }
     }
 
     // Listener class for setting budgets
