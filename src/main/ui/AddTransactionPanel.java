@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 // stackoverflow every 5 minutes //
 
 // A panel that allows users to add new transactions
-public class AddTransactionPanel extends JPanel {
+public class AddTransactionPanel extends JPanel implements ActionListener{
 
     private FinanceTrackerGUI mainApp;
     private JTextField amountField;
@@ -48,7 +48,7 @@ public class AddTransactionPanel extends JPanel {
         add(descriptionField);
 
         addButton = new JButton("Add Transaction");
-        addButton.addActionListener(new AddTransactionListener());
+        addButton.addActionListener(this);
         add(new JLabel()); // Empty label for spacing
         add(addButton);
     }
@@ -62,10 +62,7 @@ public class AddTransactionPanel extends JPanel {
         }
     }
 
-    // Listener class for adding transactions
-    private class AddTransactionListener implements ActionListener {
-        // MODIFIES: mainApp
-        public void actionPerformed(ActionEvent e) {
-        }
+    // MODIFIES: mainApp
+    public void actionPerformed(ActionEvent e) {
     }
 }
