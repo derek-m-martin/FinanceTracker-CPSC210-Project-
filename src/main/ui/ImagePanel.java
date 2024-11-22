@@ -18,7 +18,7 @@ public class ImagePanel extends JPanel {
     public ImagePanel() {
         ImageIcon icon = new ImageIcon("tbd until i mock up an image");
         image = icon.getImage();
-        setPreferredSize(new Dimension(800, 100));
+        setPreferredSize(new Dimension(800, 250));
     }
 
     // EFFECTS: paints the image onto the panel
