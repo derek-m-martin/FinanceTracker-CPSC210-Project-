@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 // stackoverflow every 5 minutes //
 
 // A panel that allows users to add new transactions
-public class AddTransactionPanel extends JPanel implements ActionListener{
+public class AddTransactionPanel extends JPanel implements ActionListener {
 
     private FinanceTrackerGUI mainApp;
     private JTextField amountField;
@@ -64,5 +64,35 @@ public class AddTransactionPanel extends JPanel implements ActionListener{
 
     // MODIFIES: mainApp
     public void actionPerformed(ActionEvent e) {
+        try {
+            // Takes all of the users inputs and if allowed then creates a corresponding transaction object
+            int amount = Integer.parseInt(amountField.getText());
+            String categoryName = (String) categoryComboBox.getSelectedItem();
+            String description = descriptionField.getText();
+            Category category = mainApp.findCategory(categoryName);
+            if (category == null) {
+                JOptionPane.showMessageDialog(this,
+                        "Category not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Transaction transaction = new Transaction(mainApp.getNextTransactionId(), amount, category);
+            transaction.setDescription(description);
+            category.getTransactions().put(transaction.getId(), transaction);
+            category.setBudget(category.getBudget() - amount);
+
+            // Success message (hopefully this is what is shown)
+            JOptionPane.showMessageDialog(this,
+                    "Transaction added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            amountField.setText("");
+            descriptionField.setText("");
+
+            // First is a non-number error, the second exception is hopefully never seen
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "You need to enter a number!", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Something definitely went wrong that should not have!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
