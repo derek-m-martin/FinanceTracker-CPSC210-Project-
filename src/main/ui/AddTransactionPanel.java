@@ -86,7 +86,7 @@ public class AddTransactionPanel extends JPanel implements ActionListener {
                     "You need to enter a number!", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
-                    "Something definitely went wrong that should not have!", "Error", JOptionPane.ERROR_MESSAGE);
+            "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
