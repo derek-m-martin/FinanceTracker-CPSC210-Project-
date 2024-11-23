@@ -196,9 +196,14 @@ public class FinanceTrackerGUI extends JFrame {
         return nextTransactionId++;
     }
 
-    // EFFECTS: finds and returns the category with the given name
+    // EFFECTS: finds and returns the category with the given name, ignoring case
     public Category findCategory(String name) {
-        return categories.get(name.toLowerCase());
+        for (String key : categories.keySet()) {
+            if (key.equalsIgnoreCase(name)) {
+                return categories.get(key);
+            }
+        }
+        return null;
     }
 
     // EFFECTS: returns all categories
