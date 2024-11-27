@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a category within the finance tracker with a name, budget, and transactions
 
-public class Category {
+public class Category implements Writable {
 
     private String name;
     private int budget;
@@ -44,12 +45,13 @@ public class Category {
         }
 
         if (totalSpent >= this.getBudget()) {
-            EventLog.getInstance().logEvent(new Event("The " + name + " category has exceeded its assigned budget of: $" + budget));
+            EventLog.getInstance()
+                    .logEvent(new Event("The " + name + " category has exceeded its assigned budget of: $" + budget));
         }
 
         return totalSpent >= this.getBudget();
     }
-    
+
     // EFFECTS: takes a category object and converts it into JSON format
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -59,7 +61,8 @@ public class Category {
         return json;
     }
 
-    // EFFECTS: takes the transaction HashMap and converts it into a JSON array format
+    // EFFECTS: takes the transaction HashMap and converts it into a JSON array
+    // format
     public JSONArray transactionsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Transaction transaction : transactions.values()) {

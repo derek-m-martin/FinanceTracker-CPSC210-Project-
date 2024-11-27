@@ -1,12 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import persistence.Writable;
 
 import org.json.JSONObject;
 
 // Represents a transaction which includes an ID, amount, category, date, and description
 
-public class Transaction {
+public class Transaction implements Writable {
 
     private int id; // Unique transaction ID
     private int amount; // Transaction amount in dollars
@@ -33,21 +34,24 @@ public class Transaction {
     // EFFECTS: sets the transaction amount
     public void setAmount(int amt) {
         this.amount = amt;
-        EventLog.getInstance().logEvent(new Event("Changed the transaction with ID: " + id + "'s amount to the new amount of: " + amount));
+        EventLog.getInstance().logEvent(
+                new Event("Changed the transaction with ID: " + id + "'s amount to the new amount of: " + amount));
     }
 
     // MODIFIES: this
     // EFFECTS: sets the transaction description
     public void setDescription(String newDesc) {
         this.description = newDesc;
-        EventLog.getInstance().logEvent(new Event("Changed the transaction with ID: " + id + "'s description to: " + newDesc));
+        EventLog.getInstance()
+                .logEvent(new Event("Changed the transaction with ID: " + id + "'s description to: " + newDesc));
     }
 
     // REQUIRES: newCategory must be an already existing category
     // MODIFIES: this, category budgets
     // EFFECTS: moves the transaction to the new category and updates budgets
     public void moveTransaction(Category newCategory) {
-        EventLog.getInstance().logEvent(new Event("Moved the transaction with ID: " + id + " from the " + this.category.getName() + " category to the " + newCategory.getName() + " category."));
+        EventLog.getInstance().logEvent(new Event("Moved the transaction with ID: " + id + " from the "
+                + this.category.getName() + " category to the " + newCategory.getName() + " category."));
         this.category.setBudget(this.category.getBudget() + this.amount);
         this.category.getTransactions().remove(this.id);
         newCategory.setBudget(newCategory.getBudget() - this.amount);
