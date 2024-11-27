@@ -69,10 +69,9 @@ public class AddTransactionPanel extends JPanel implements ActionListener {
             String categoryName = (String) categoryComboBox.getSelectedItem();
             String description = descriptionField.getText();
             Category category = mainApp.findCategory(categoryName);
-            Transaction transaction = new Transaction(mainApp.getNextTransactionId(), amount, category);
-            transaction.setDescription(description);
+            Transaction transaction = new Transaction(mainApp.getNextTransactionId(), amount, category, description);
             category.getTransactions().put(transaction.getId(), transaction);
-            category.setBudget(category.getBudget() - amount);
+            category.isBudgetReached();
 
             // Success message (hopefully this is what is shown)
             JOptionPane.showMessageDialog(this,
@@ -86,7 +85,7 @@ public class AddTransactionPanel extends JPanel implements ActionListener {
                     "You need to enter a number!", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
-            "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                            "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

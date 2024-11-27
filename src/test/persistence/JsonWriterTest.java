@@ -83,13 +83,13 @@ class JsonWriterTest extends JsonTest {
     private HashMap<String, Category> createTestCategories() {
         HashMap<String, Category> categories = createEmptyCategories();
         Category foodCategory = categories.get("FOOD");
-        Transaction transaction1 = new Transaction(1, 100, foodCategory);
+        Transaction transaction1 = new Transaction(1, 100, foodCategory, "test1");
         transaction1.setDescription("Grocery shopping");
         foodCategory.getTransactions().put(1, transaction1);
         foodCategory.setBudget(900);
 
         Category transportationCategory = categories.get("TRANSPORTATION");
-        Transaction transaction2 = new Transaction(2, 50, transportationCategory);
+        Transaction transaction2 = new Transaction(2, 50, transportationCategory, "test2");
         transaction2.setDescription("Bus fare");
         transportationCategory.getTransactions().put(2, transaction2);
         transportationCategory.setBudget(950);

@@ -1,6 +1,7 @@
 package ui;
 
 import model.Category;
+import model.EventLog;
 import model.Transaction;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -129,6 +130,10 @@ public class FinanceTrackerGUI extends JFrame {
                 JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
             saveState();
+        }
+        EventLog eventLog = EventLog.getInstance();
+        for (model.Event event : eventLog) {
+            System.out.println(event); 
         }
         System.exit(0);
     }

@@ -42,6 +42,11 @@ public class Category {
         for (Transaction t : transactions.values()) {
             totalSpent += t.getAmount();
         }
+
+        if (totalSpent >= this.getBudget()) {
+            EventLog.getInstance().logEvent(new Event("The " + name + " category has exceeded its assigned budget of: $" + budget));
+        }
+
         return totalSpent >= this.getBudget();
     }
     

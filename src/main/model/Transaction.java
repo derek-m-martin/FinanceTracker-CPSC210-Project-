@@ -17,13 +17,15 @@ public class Transaction {
     // REQUIRES: amount > 0, category is valid
     // EFFECTS: initializes a transaction with the given ID, amount, and category;
     // date is set to current date
-    public Transaction(int id, int transAmount, Category category) {
+    public Transaction(int id, int transAmount, Category category, String description) {
         this.id = id;
         this.amount = transAmount;
         this.category = category;
         this.date = LocalDate.now();
-        this.description = "";
+        this.description = description;
         category.getTransactions().put(this.id, this);
+        EventLog.getInstance().logEvent(new Event("Created a new transaction with the following details: ID: " + id
+                + " Amount: " + amount + " Category: " + category.getName() + " Description: " + description));
     }
 
     // REQUIRES: amt > 0
@@ -31,18 +33,21 @@ public class Transaction {
     // EFFECTS: sets the transaction amount
     public void setAmount(int amt) {
         this.amount = amt;
+        EventLog.getInstance().logEvent(new Event("Changed the transaction with ID: " + id + "'s amount to the new amount of: " + amount));
     }
 
     // MODIFIES: this
     // EFFECTS: sets the transaction description
     public void setDescription(String newDesc) {
         this.description = newDesc;
+        EventLog.getInstance().logEvent(new Event("Changed the transaction with ID: " + id + "'s description to: " + newDesc));
     }
 
     // REQUIRES: newCategory must be an already existing category
     // MODIFIES: this, category budgets
     // EFFECTS: moves the transaction to the new category and updates budgets
     public void moveTransaction(Category newCategory) {
+        EventLog.getInstance().logEvent(new Event("Moved the transaction with ID: " + id + " from the " + this.category.getName() + " category to the " + newCategory.getName() + " category."));
         this.category.setBudget(this.category.getBudget() + this.amount);
         this.category.getTransactions().remove(this.id);
         newCategory.setBudget(newCategory.getBudget() - this.amount);
@@ -57,6 +62,7 @@ public class Transaction {
         category.setBudget(category.getBudget() + this.amount);
         // Remove transaction from category
         category.getTransactions().remove(this.id);
+        EventLog.getInstance().logEvent(new Event("Deleted the transaction with ID: " + id));
     }
 
     // MODIFIES: this
@@ -64,12 +70,12 @@ public class Transaction {
     public void setId(int newId) {
         this.id = newId;
     }
-    
+
     // MODIFIES: this
     // EFFECTS: sets a new date for the transaction
     public void setDate(LocalDate date) {
         this.date = date;
-    }    
+    }
 
     // EFFECTS: takes a transaction object and converts it into JSON format
     public JSONObject toJson() {
@@ -77,7 +83,7 @@ public class Transaction {
         json.put("id", id);
         json.put("amount", amount);
         json.put("description", description);
-        json.put("date", date.toString()); 
+        json.put("date", date.toString());
         return json;
     }
 

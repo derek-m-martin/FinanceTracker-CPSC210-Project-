@@ -17,13 +17,13 @@ public class TransactionTest {
     void runBefore() {
         testCategory1 = new Category("TestCategory1", 500);
         testCategory2 = new Category("TestCategory2", 1250);
-        testTransaction = new Transaction(1, 100, testCategory1);
+        testTransaction = new Transaction(1, 100, testCategory1, "test1");
     }
 
     @Test
     void testConstructor() {
         assertEquals(100, testTransaction.getAmount());
-        assertEquals("", testTransaction.getDescription());
+        assertEquals("test1", testTransaction.getDescription());
         assertEquals(testCategory1, testTransaction.getCategory());
         assertEquals(LocalDate.now(), testTransaction.getDate());
         assertEquals(1, testTransaction.getId());

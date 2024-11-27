@@ -141,26 +141,61 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
             String newCategoryName = (String) categoryComboBox.getSelectedItem();
             Category newCategory = mainApp.findCategory(newCategoryName);
 
-            if (newCategory == null) {
+            isCatInvalid(newCategory);
+
+            boolean isUpdated = false;
+
+            isUpdated = hasAmtChanged(newAmount, isUpdated);
+            isUpdated = hasDescChanged(newDescription, isUpdated);
+            isUpdated = hasCatChanged(newCategory, isUpdated);
+
+            if (isUpdated) {
                 JOptionPane.showMessageDialog(EditTransactionPanel.this,
-                        "Category not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                        "Transaction updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                        "No changes detected.", "Info", JOptionPane.INFORMATION_MESSAGE);
             }
-
-            currentTransaction.getCategory().setBudget(
-                    currentTransaction.getCategory().getBudget() + currentTransaction.getAmount());
-            currentTransaction.setAmount(newAmount);
-            currentTransaction.setDescription(newDescription);
-            currentTransaction.moveTransaction(newCategory);
-            currentTransaction.getCategory().setBudget(
-                    currentTransaction.getCategory().getBudget() - newAmount);
-
-            JOptionPane.showMessageDialog(EditTransactionPanel.this,
-                    "Transaction updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(EditTransactionPanel.this,
                     "Invalid input.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void isCatInvalid(Category newCategory) {
+        if (newCategory == null) {
+            JOptionPane.showMessageDialog(EditTransactionPanel.this,
+                    "Category not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    private boolean hasCatChanged(Category newCategory, boolean isUpdated) {
+        if (!newCategory.equals(currentTransaction.getCategory())) {
+            currentTransaction.moveTransaction(newCategory);
+            isUpdated = true;
+        }
+        return isUpdated;
+    }
+
+    private boolean hasDescChanged(String newDescription, boolean isUpdated) {
+        if (!newDescription.equals(currentTransaction.getDescription())) {
+            currentTransaction.setDescription(newDescription);
+            isUpdated = true;
+        }
+        return isUpdated;
+    }
+
+    private boolean hasAmtChanged(int newAmount, boolean isUpdated) {
+        if (newAmount != currentTransaction.getAmount()) {
+            currentTransaction.getCategory().setBudget(
+                    currentTransaction.getCategory().getBudget() + currentTransaction.getAmount());
+            currentTransaction.setAmount(newAmount);
+            currentTransaction.getCategory().setBudget(
+                    currentTransaction.getCategory().getBudget() - newAmount);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
     // MODIFIES: mainApp

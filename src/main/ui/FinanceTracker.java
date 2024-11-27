@@ -151,8 +151,7 @@ public class FinanceTracker {
             desc = "";
         }
 
-        Transaction temp = new Transaction(nextTransactionId++, amount, category);
-        temp.setDescription(desc);
+        Transaction temp = new Transaction(nextTransactionId++, amount, category, desc);
         category.getTransactions().put(temp.getId(), temp);
         category.setBudget(category.getBudget() - amount);
     }

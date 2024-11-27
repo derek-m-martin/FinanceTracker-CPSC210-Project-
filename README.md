@@ -60,3 +60,21 @@ This project will be usable by **anyone** who wants to finally take charge of th
 
 - **You** can reload the state of my application by either clicking 'yes' or 'no' on the prompt that comes up when you run the application which gives you the option to load data right away. Alternatively like saving you can also navigate to the "File" button in the top left and then clicking "Load Data." **An important note though is if you don't load existing data when you launch the application, add/edit/delete new transactions, but then choose to load your existing data later on, it will overwrite the new transactions you put in.**
 
+## Phase 4 Task 2:
+
+Wed Nov 27 13:29:47 PST 2024
+Created a new transaction with the following details: ID: 0 Amount: 50 Category: TRANSPORTATION Description: uber ride
+Wed Nov 27 13:29:59 PST 2024
+Created a new transaction with the following details: ID: 1 Amount: 200 Category: FOOD Description: costco trip
+Wed Nov 27 13:30:14 PST 2024
+Changed the transaction with ID: 0's amount to the new amount of: 1200
+Wed Nov 27 13:30:14 PST 2024
+Changed the transaction with ID: 0's description to: rent
+Wed Nov 27 13:30:14 PST 2024
+Moved the transaction with ID: 0 from the TRANSPORTATION category to the HOUSING category.
+Wed Nov 27 13:30:22 PST 2024
+Deleted the transaction with ID: 1
+Wed Nov 27 13:30:36 PST 2024
+Created a new transaction with the following details: ID: 2 Amount: 5000 Category: ENTERTAINMENT Description: exceed entertainment budget
+Wed Nov 27 13:30:36 PST 2024
+The ENTERTAINMENT category has exceeded its assigned budget of: $1000

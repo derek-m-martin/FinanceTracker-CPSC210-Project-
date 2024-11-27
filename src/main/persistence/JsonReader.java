@@ -61,7 +61,7 @@ public class JsonReader {
             String dateStr = jsonTransaction.getString("date");
             LocalDate date = LocalDate.parse(dateStr);
     
-            Transaction transaction = new Transaction(id, amount, category);
+            Transaction transaction = new Transaction(id, amount, category, description);
             transaction.setDescription(description);
             transaction.setDate(date);
     
