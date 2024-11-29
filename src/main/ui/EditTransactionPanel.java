@@ -36,27 +36,12 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: initializes and adds components to the panel
-    @SuppressWarnings("methodlength")
     private void initializeComponents() {
-        add(new JLabel("Transaction ID:"));
-        transactionIdField = new JTextField();
-        add(transactionIdField);
+        componentHelper1();
+        componentHelper2();
+    }
 
-        searchButton = new JButton("Search");
-        searchButton.addActionListener(this);
-        add(new JLabel());
-        add(searchButton);
-
-        add(new JLabel("Amount:"));
-        amountField = new JTextField();
-        amountField.setEnabled(false);
-        add(amountField);
-
-        add(new JLabel("Description:"));
-        descriptionField = new JTextField();
-        descriptionField.setEnabled(false);
-        add(descriptionField);
-
+    private void componentHelper2() {
         add(new JLabel("Category:"));
         categoryComboBox = new JComboBox<>();
         categoryComboBox.setEnabled(false);
@@ -75,6 +60,27 @@ public class EditTransactionPanel extends JPanel implements ActionListener {
         searchButton.setActionCommand("search");
         updateButton.setActionCommand("update");
         deleteButton.setActionCommand("delete");
+    }
+
+    private void componentHelper1() {
+        add(new JLabel("Transaction ID:"));
+        transactionIdField = new JTextField();
+        add(transactionIdField);
+
+        searchButton = new JButton("Search");
+        searchButton.addActionListener(this);
+        add(new JLabel());
+        add(searchButton);
+
+        add(new JLabel("Amount:"));
+        amountField = new JTextField();
+        amountField.setEnabled(false);
+        add(amountField);
+
+        add(new JLabel("Description:"));
+        descriptionField = new JTextField();
+        descriptionField.setEnabled(false);
+        add(descriptionField);
     }
 
     // MODIFIES: this

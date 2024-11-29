@@ -45,6 +45,8 @@ public class JsonReader {
             addTransactionsToCategory(category, jsonTransactions);
     
             categories.put(name, category);
+
+            category.markAsLoaded();
         }
     
         return categories;

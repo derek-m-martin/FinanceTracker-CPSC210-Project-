@@ -22,7 +22,7 @@ public class FinanceTracker {
     private Scanner input;
     private HashMap<String, Category> categories;
     private int nextTransactionId;
-    private static final String JSON_STORE = "./ProjectStarter/data/financetracker.json";
+    private static final String JSON_STORE = "data/financetracker.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -42,7 +42,7 @@ public class FinanceTracker {
         String instruction = "";
 
         initialize();
-        
+
         System.out.println("Would you like to load your previous saved data? (y/n)");
         String loadAnswer = input.next().toLowerCase();
         if (loadAnswer.equals("y")) {
@@ -402,7 +402,6 @@ public class FinanceTracker {
         System.out.println("Spent an additional $" + miscellaneousPrint + " in uncategorized transactions");
     }
 
-    @SuppressWarnings("methodlength")
     // REQUIRES: five integer values and a non-empty list of Transaction objects
     // MODIFIES: the given integer values
     // EFFECTS: aggregates spending amounts by category
@@ -429,6 +428,11 @@ public class FinanceTracker {
                     break;
             }
         }
+        return organizeValuesHelper(food, housing, transportation, entertainment, miscellaneous);
+    }
+
+    private List<Integer> organizeValuesHelper(int food, int housing, int transportation, int entertainment,
+            int miscellaneous) {
         List<Integer> nums = new ArrayList<>();
         nums.add(food);
         nums.add(housing);
@@ -503,8 +507,8 @@ public class FinanceTracker {
         }
     }
 
-
-    // EFFECTS: finds the highest transaction ID in the loaded data and sets nextTransactionId to one higher
+    // EFFECTS: finds the highest transaction ID in the loaded data and sets
+    // nextTransactionId to one higher
     private void updateNextTransactionId() {
         int highestId = -1;
         for (Category category : categories.values()) {

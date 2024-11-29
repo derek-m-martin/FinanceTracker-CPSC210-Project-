@@ -23,6 +23,12 @@ public class Category implements Writable {
         this.transactions = new HashMap<>();
     }
 
+    // EFFECTS: ensures that the loading of categories only gets logged ONCE
+    public void markAsLoaded() {
+        EventLog.getInstance()
+                .logEvent(new Event("Loaded the " + name + " category and all of its transactions!"));
+    }
+
     // REQUIRES: newName is not empty
     // MODIFIES: this
     // EFFECTS: sets the category name
@@ -58,6 +64,8 @@ public class Category implements Writable {
         json.put("name", name);
         json.put("budget", budget);
         json.put("transactions", transactionsToJson());
+        EventLog.getInstance()
+                .logEvent(new Event("Saved the " + name + " category and all of its transactions!"));
         return json;
     }
 

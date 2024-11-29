@@ -30,12 +30,12 @@ class JsonWriterTest extends JsonTest {
     void testWriterEmptyCategories() {
         try {
             HashMap<String, Category> categories = createEmptyCategories();
-            JsonWriter writer = new JsonWriter("./ProjectStarter/data/testWriterEmptyCategories.json");
+            JsonWriter writer = new JsonWriter("data/testWriterEmptyCategories.json");
             writer.open();
             writer.write(categoriesToJson(categories));
             writer.close();
 
-            JsonReader reader = new JsonReader("./ProjectStarter/data/testWriterEmptyCategories.json");
+            JsonReader reader = new JsonReader("data/testWriterEmptyCategories.json");
             categories = reader.readCategories();
             assertEquals(5, categories.size());
             assertEquals(0, categories.get("FOOD").getTransactions().size());
@@ -48,12 +48,12 @@ class JsonWriterTest extends JsonTest {
     void testWriterNonEmptyCategories() {
         try {
             HashMap<String, Category> categories = createTestCategories();
-            JsonWriter writer = new JsonWriter("./ProjectStarter/data/testWriterNonEmptyCategories.json");
+            JsonWriter writer = new JsonWriter("data/testWriterNonEmptyCategories.json");
             writer.open();
             writer.write(categoriesToJson(categories));
             writer.close();
 
-            JsonReader reader = new JsonReader("./ProjectStarter/data/testWriterNonEmptyCategories.json");
+            JsonReader reader = new JsonReader("data/testWriterNonEmptyCategories.json");
             categories = reader.readCategories();
 
             assertEquals(5, categories.size());
