@@ -62,19 +62,41 @@ This project will be usable by **anyone** who wants to finally take charge of th
 
 ## Phase 4 Task 2:
 
-Wed Nov 27 13:29:47 PST 2024
-Created a new transaction with the following details: ID: 0 Amount: 50 Category: TRANSPORTATION Description: uber ride
-Wed Nov 27 13:29:59 PST 2024
-Created a new transaction with the following details: ID: 1 Amount: 200 Category: FOOD Description: costco trip
-Wed Nov 27 13:30:14 PST 2024
-Changed the transaction with ID: 0's amount to the new amount of: 1200
-Wed Nov 27 13:30:14 PST 2024
-Changed the transaction with ID: 0's description to: rent
-Wed Nov 27 13:30:14 PST 2024
-Moved the transaction with ID: 0 from the TRANSPORTATION category to the HOUSING category.
-Wed Nov 27 13:30:22 PST 2024
+Fri Nov 29 12:41:01 PST 2024
+Loaded the ENTERTAINMENT category and all of its transactions!
+Fri Nov 29 12:41:01 PST 2024
+Loaded the TRANSPORTATION category and all of its transactions!
+Fri Nov 29 12:41:01 PST 2024
+Loaded the MISCELLANEOUS category and all of its transactions!
+Fri Nov 29 12:41:01 PST 2024
+Loaded the HOUSING category and all of its transactions!
+Fri Nov 29 12:41:01 PST 2024
+Loaded the FOOD category and all of its transactions!
+Fri Nov 29 12:41:13 PST 2024
+Created a new transaction with the following details: ID: 0 Amount: 675 Category: MISCELLANEOUS Description: invested in stocks
+Fri Nov 29 12:41:23 PST 2024
+Created a new transaction with the following details: ID: 1 Amount: 50000 Category: HOUSING Description: downpayment on a house
+Fri Nov 29 12:41:23 PST 2024
+The HOUSING category has exceeded its assigned budget of: $1000
+Fri Nov 29 12:41:47 PST 2024
+Changed the transaction with ID: 0's amount to the new amount of: 1000
+Fri Nov 29 12:41:47 PST 2024
+Moved the transaction with ID: 0 from the MISCELLANEOUS category to the TRANSPORTATION category.
+Fri Nov 29 12:41:54 PST 2024
 Deleted the transaction with ID: 1
-Wed Nov 27 13:30:36 PST 2024
-Created a new transaction with the following details: ID: 2 Amount: 5000 Category: ENTERTAINMENT Description: exceed entertainment budget
-Wed Nov 27 13:30:36 PST 2024
-The ENTERTAINMENT category has exceeded its assigned budget of: $1000
+Fri Nov 29 12:41:59 PST 2024
+Saved the ENTERTAINMENT category and all of its transactions!
+Fri Nov 29 12:41:59 PST 2024
+Saved the TRANSPORTATION category and all of its transactions!
+Fri Nov 29 12:41:59 PST 2024
+Saved the MISCELLANEOUS category and all of its transactions!
+Fri Nov 29 12:41:59 PST 2024
+Saved the HOUSING category and all of its transactions!
+Fri Nov 29 12:41:59 PST 2024
+Saved the FOOD category and all of its transactions!
+
+## Phase 4 Task 3:
+
+A flaw I see in my current design is the coupling between the category and transaction classes. One prominent area of this is in the **moveTransaction** method in the **Transaction** class. It directly accesses both the previous and new category objects and modifies them in more than one way (such as setBudget or directly putting/removing the transaction from its HashMap) which demonstrates how 'bad' the coupling currently is and can also be seen in the diagram through their bi-directional relationship. A way this could be mitigated is to introduce some kind of intermediary class. Think of it like when you're buying insurance. You (the transaction) are not manually configuring/creating your own insurance plan (the category), instead you use an insurance broker who you tell what you want (to set a categories budget or to move from one plan to another) and then the broker turns around and does it on your behalf. 
+
+Hopefully my analogy made some sense, but simply put it would remove any direct interactions between the transaction and category classes, instead putting them all through this 'broker' class. This not only helps with coupling between the **Transaction** and **Category** classes, but also the **FinanceTracker** and **FinanceTrackerGUI** classes who also both deal directly with both of those classes as well which can be seen by the quite messy bunch of associations in that middle region of the UML diagram between the Category, Transaction, FinanceTracker, and FinanceTrackerGUI classes. If this intermediary were to be implemented it would essentially take all of those split associations and instead route them all into and out of the intermediary class. For example, if the program wanted to move a transaction from one category to another, it would call a moveTransaction method in the intermediary class and pass the transaction and new category to be moved to and then the intermediary would take that information, and make the necessary calls/interactions with the Category class and others if needed. Same would apply if the FinanceTrackerGUI wanted to delete a transaction or something, it would all be routed through that 'middleman' class. All this would be seen easily on an updated UML diagram as all of those associations would go into and out of **ONE** class (the intermediary) instead of between eachother in a jumbled mess, thereby decreasing coupling!
