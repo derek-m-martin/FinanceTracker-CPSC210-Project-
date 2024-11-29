@@ -62,38 +62,37 @@ This project will be usable by **anyone** who wants to finally take charge of th
 
 ## Phase 4 Task 2:
 
-Fri Nov 29 12:41:01 PST 2024
-Loaded the ENTERTAINMENT category and all of its transactions!
-Fri Nov 29 12:41:01 PST 2024
-Loaded the TRANSPORTATION category and all of its transactions!
-Fri Nov 29 12:41:01 PST 2024
-Loaded the MISCELLANEOUS category and all of its transactions!
-Fri Nov 29 12:41:01 PST 2024
-Loaded the HOUSING category and all of its transactions!
-Fri Nov 29 12:41:01 PST 2024
-Loaded the FOOD category and all of its transactions!
-Fri Nov 29 12:41:13 PST 2024
-Created a new transaction with the following details: ID: 0 Amount: 675 Category: MISCELLANEOUS Description: invested in stocks
-Fri Nov 29 12:41:23 PST 2024
-Created a new transaction with the following details: ID: 1 Amount: 50000 Category: HOUSING Description: downpayment on a house
-Fri Nov 29 12:41:23 PST 2024
-The HOUSING category has exceeded its assigned budget of: $1000
-Fri Nov 29 12:41:47 PST 2024
-Changed the transaction with ID: 0's amount to the new amount of: 1000
-Fri Nov 29 12:41:47 PST 2024
-Moved the transaction with ID: 0 from the MISCELLANEOUS category to the TRANSPORTATION category.
-Fri Nov 29 12:41:54 PST 2024
-Deleted the transaction with ID: 1
-Fri Nov 29 12:41:59 PST 2024
-Saved the ENTERTAINMENT category and all of its transactions!
-Fri Nov 29 12:41:59 PST 2024
-Saved the TRANSPORTATION category and all of its transactions!
-Fri Nov 29 12:41:59 PST 2024
-Saved the MISCELLANEOUS category and all of its transactions!
-Fri Nov 29 12:41:59 PST 2024
-Saved the HOUSING category and all of its transactions!
-Fri Nov 29 12:41:59 PST 2024
-Saved the FOOD category and all of its transactions!
+Fri Nov 29 12:41:01 PST 2024 Loaded the ENTERTAINMENT category and all of its transactions!
+
+Fri Nov 29 12:41:01 PST 2024 Loaded the TRANSPORTATION category and all of its transactions!
+
+Fri Nov 29 12:41:01 PST 2024 Loaded the MISCELLANEOUS category and all of its transactions!
+
+Fri Nov 29 12:41:01 PST 2024 Loaded the HOUSING category and all of its transactions!
+
+Fri Nov 29 12:41:01 PST 2024 Loaded the FOOD category and all of its transactions!
+
+Fri Nov 29 12:41:13 PST 2024 Created a new transaction with the following details: ID: 0 Amount: 675 Category: MISCELLANEOUS Description: invested in stocks
+
+Fri Nov 29 12:41:23 PST 2024 Created a new transaction with the following details: ID: 1 Amount: 50000 Category: HOUSING Description: downpayment on a house
+
+Fri Nov 29 12:41:23 PST 2024 The HOUSING category has exceeded its assigned budget of: $1000
+
+Fri Nov 29 12:41:47 PST 2024 Changed the transaction with ID: 0's amount to the new amount of: 1000
+
+Fri Nov 29 12:41:47 PST 2024 Moved the transaction with ID: 0 from the MISCELLANEOUS category to the TRANSPORTATION category.
+
+Fri Nov 29 12:41:54 PST 2024 Deleted the transaction with ID: 1
+
+Fri Nov 29 12:41:59 PST 2024 Saved the ENTERTAINMENT category and all of its transactions!
+
+Fri Nov 29 12:41:59 PST 2024 Saved the TRANSPORTATION category and all of its transactions!
+
+Fri Nov 29 12:41:59 PST 2024 Saved the MISCELLANEOUS category and all of its transactions!
+
+Fri Nov 29 12:41:59 PST 2024 Saved the HOUSING category and all of its transactions!
+
+Fri Nov 29 12:41:59 PST 2024 Saved the FOOD category and all of its transactions!
 
 ## Phase 4 Task 3:
 
