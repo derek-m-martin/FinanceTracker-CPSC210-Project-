@@ -80,6 +80,13 @@ public class SummaryPanel extends JPanel {
 
             displaySummary(startDate, endDate, foodAmt, housingAmt, entertainmentAmt,
                     transportationAmt, miscellaneousAmt);
+
+            foodAmt = 0;
+            housingAmt = 0;
+            entertainmentAmt = 0;
+            transportationAmt = 0;
+            miscellaneousAmt = 0; 
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(SummaryPanel.this,
                     "Invalid date format.", "Error", JOptionPane.ERROR_MESSAGE);
